@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import Cart from '../views/Cart.vue'
 import Product from '../views/SingleProductView.vue'
 
+
+
 Vue.use(VueRouter)
 
 const routes = [{
@@ -15,14 +17,14 @@ const routes = [{
     path: '/Cart',
     name: 'Cart',
     component: Cart
-
   },
   {
     path: '/Product',
     name: 'Product',
     component: Product
   },
-]
+  ]
+
 
 const router = new VueRouter({
   mode: 'history',
