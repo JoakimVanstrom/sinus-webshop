@@ -5,16 +5,15 @@
       <router-link to="/">Home</router-link>
       <router-link to="/Cart">Cart</router-link>
     </nav>
-    <Login />
     <router-view />
   </div>
 </template>
 
 <script>
-import Login from "@/components/Login.vue";
+
 import Header from "@/components/Header.vue";
 export default {
-  components: { Header, Login },
+  components: { Header,  },
 };
 </script>
 
