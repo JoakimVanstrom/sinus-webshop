@@ -1,8 +1,7 @@
 <template>
   <main>
-
     <div class="return-arrow">
-      <img src="@/assets/icons/arrow-return-left.svg" height="50px"/>
+      <img src="@/assets/icons/arrow-return-left.svg" height="50px" />
     </div>
 
     <h1 class="h1">Mina Piravidsar</h1>
@@ -20,10 +19,9 @@
       <div class="bottom">
         <h2>Total cost</h2>
         <p>1337 SEK</p>
-        <button>Checkout</button>
+        <button><router-link to="/Checkout">Checkout</router-link></button>
       </div>
     </div>
-
   </main>
 </template>
 
@@ -32,11 +30,11 @@ export default {};
 </script>
 
 <style scoped>
-*{
+* {
   margin: 0;
 }
-.return-arrow{
- display: grid;
+.return-arrow {
+  display: grid;
   place-items: left;
 }
 .h1 {
@@ -44,7 +42,7 @@ export default {};
 }
 
 .checkout {
- position: -webkit-sticky;
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   display: grid;
@@ -58,7 +56,7 @@ export default {};
   margin-bottom: 500px;
 }
 button {
- background: rgba(161, 0, 0, 0.7);
+  background: rgba(161, 0, 0, 0.7);
   border: none;
   font-size: 1.5rem;
   font-weight: bold;
@@ -67,5 +65,9 @@ button {
   border-radius: 0.5rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+}
+a {
+  text-decoration: none;
+  color: #fff;
 }
 </style>
