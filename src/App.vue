@@ -6,13 +6,15 @@
       <router-link to="/Cart">Cart</router-link>
     </nav>
     <router-view />
+    <Footer />
   </div>
 </template>
 
 <script>
 import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
 export default {
-  components: { Header },
+  components: { Header, Footer },
   mounted() {
     return this.$store.dispatch("fetchProducts");
   },
