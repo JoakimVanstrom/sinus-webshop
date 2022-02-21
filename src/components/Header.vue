@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <img src="@/assets/icons/pirateship.png" alt="">
+    <img src="@/assets/icons/pirateship.png" alt="" />
     <h1>Piravid</h1>
     <div>
       <img src="@/assets/icons/shopping-cart.svg" alt="" />
@@ -18,24 +18,25 @@ export default {};
 <style scoped lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Pirata+One&display=swap");
 header {
-  background-color: black;
+  background-color: #131313;
   width: 100%;
   height: 76;
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(13, 1fr);
   grid-template-rows: auto;
-  img{
-    
+  img {
     grid-row: 1/3;
-    grid-column: 4/5;
+    grid-column: 5/5;
     width: 5rem;
     border-radius: 50%;
     padding: 1rem 0;
+    justify-self: center;
   }
   h1 {
     grid-row: 1/3;
-    grid-column: 6/10;
+    grid-column: 7/10;
     align-self: center;
+    margin-left: 50%;
     font-family: "Pirata One", cursive;
     color: white;
     font-size: 64px;
@@ -52,7 +53,7 @@ header {
     }
   }
   input {
-    grid-column: 8/11;
+    grid-column: 9/11;
     grid-row: 2;
     padding-bottom: 0;
   }
