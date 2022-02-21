@@ -10,10 +10,12 @@
 </template>
 
 <script>
-
 import Header from "@/components/Header.vue";
 export default {
-  components: { Header,  },
+  components: { Header },
+  mounted() {
+    return this.$store.dispatch("fetchProducts");
+  },
 };
 </script>
 
