@@ -58,15 +58,14 @@ export default {};
   margin-bottom: 500px;
 }
 button {
-  background-color: #a10000;
-  border-style: none;
-  border-radius: 5px;
-  color: #fff;
-  /* font-size: 1rem; */
+ background: rgba(161, 0, 0, 0.7);
+  border: none;
+  font-size: 1.5rem;
   font-weight: bold;
-  padding: 1rem 2.5rem;
-  text-transform: uppercase;
-  transition: all 0.2s ease-in-out;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 </style>
