@@ -9,6 +9,7 @@ export default new Vuex.Store({
     email: null,
     productsList: []
   },
+
   mutations: {
     saveAuthData(state, authData){
       state.email = authData.email
@@ -17,6 +18,7 @@ export default new Vuex.Store({
       state.productsList = products.products
     },
   },
+
   actions: {
     async authenticate(context, credentials){
       const response = await API.login(credentials.email, credentials.password)
@@ -27,8 +29,8 @@ export default new Vuex.Store({
       const response = await API.getProducts()
       context.commit('saveProducts', response.data)
     }
-    
   },
+
   modules: {
   }
 })
