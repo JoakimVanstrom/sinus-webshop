@@ -5,7 +5,11 @@ const asyncHandler = require('../utils/asyncHandler')
 const Validations = require('../validations')
 const router = new Router()
 
-router.get('/',         Auth.anonymous, asyncHandler(ProductController.getAll))
+router.get('/',
+  Auth.anonymous,
+  Validations.getProducts,
+  asyncHandler(ProductController.getAll)
+)
 router.get('/:id',      Auth.anonymous, asyncHandler(ProductController.getOne))
 router.post('/', 
   Auth.admin,

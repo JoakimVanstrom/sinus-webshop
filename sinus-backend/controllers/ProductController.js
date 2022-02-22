@@ -1,7 +1,7 @@
 const {  ProductNotFound } = require("../errors")
 const Product = require("../models/Product")
 
-function parseQuery(query){
+function parsePagination(query){
   const page = +query.page || 1
   let pageSize = +query.pageSize || 10
   
@@ -17,16 +17,20 @@ module.exports = {
   },
   
   async getAll(req, res){
-    const {page,pageSize} = parseQuery(req.query)
-    const {category} = req.query
-    const products = await Product.findAll({
-      limit: pageSize,
-      offset: (page-1)*pageSize,
-      where: {
-        ...(category && {category})
-      }
-    })
-    res.json({products})
+    const {page,pageSize} = parsePagination(req.query)
+    let products = []
+    if(req.query.category){
+      products = await Product.findPageByCategory(page, pageSize, req.query.category)
+    }else if(req.query.exclude){
+      const excludedCategories = req.query.exclude.split(",")
+      products = await Product.findPageByExcludedCategories(page, pageSize, excludedCategories)
+    }else if(req.query.search){
+      const terms = req.query.search.replace("+", " ")
+      products = await Product.search(terms)
+    }else{
+      products = await Product.findPage(page, pageSize)
+    }
+    res.json(products)
   },
   
   async getOne(req, res, next){

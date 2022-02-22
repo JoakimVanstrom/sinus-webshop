@@ -7,15 +7,24 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     email: null,
-    productsList: []
+    productsList: [],
+    productCategory: '',
+    // productsObject: {},
   },
   mutations: {
     saveAuthData(state, authData){
       state.email = authData.email
     },
     saveProducts(state, products){
-      state.productsList = products.products
+      state.productsList = products
+      // for(let product of state.productsList){
+      //   const id = product.id
+      //   state.productsObject[id] = product
+      // }
     },
+    changeCategory(state, category){
+      state.category = category.products
+    }
   },
   actions: {
     async authenticate(context, credentials){
@@ -26,6 +35,7 @@ export default new Vuex.Store({
     async fetchProducts(context){
       const response = await API.getProducts()
       context.commit('saveProducts', response.data)
+     
     }
     
   },

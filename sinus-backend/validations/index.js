@@ -1,4 +1,9 @@
-const {check, body, validationResult} = require('express-validator')
+const {
+  check, 
+  body, 
+  validationResult, 
+  query,
+} = require('express-validator')
 const {ORDER_STATUSES, PRODUCT_CATEGORIES} = require('../constants')
 
 const validator = (validations) => async (req,res,next) => {
@@ -12,7 +17,9 @@ const validator = (validations) => async (req,res,next) => {
     return next();
   }
 
-  res.status(400).json({ errors: errors.array() });
+
+  res.status(400).json({ errors: errors.array()});
+  
 }
 
 module.exports = {
@@ -45,6 +52,41 @@ module.exports = {
     check('address.city')
       .exists()
       .withMessage('Missing city'),
+  ]),
+
+  getProducts: validator([
+    query('category')
+      .optional()
+      .isIn(PRODUCT_CATEGORIES)
+      .withMessage('Category must be one of '+PRODUCT_CATEGORIES.join(","))
+      .bail()
+      .if(query('exclude').exists())
+      .not().exists().withMessage('category cannot be used together with exclude'),
+    query('exclude')
+      .optional()
+      .custom(value => value.split(",").every(val => PRODUCT_CATEGORIES.includes(val)))      
+      .withMessage('Categories must be list of '+PRODUCT_CATEGORIES.join(","))
+      .bail()
+      .if(query('category').exists())
+      .not().exists().withMessage('category cannot be used together with exclude'),
+    query('search')
+      .optional()
+      .isLength({min: 3})
+      .withMessage('Search terms must be at least 3 characters')
+    // oneOf([
+    //   [
+    //     query('exclude').not().exists()
+    //       .withMessage('exclude cannot be used together with category')
+    //       .bail(),
+    //     query('category').isIn(PRODUCT_CATEGORIES)
+    //       .bail()
+    //   ],
+    //   [
+    //     query('exclude').isIn(PRODUCT_CATEGORIES)],
+    //   [
+    //     query('search').isLength({min:3})
+    //   ]
+    // ])
   ]),
 
   createProduct: validator([

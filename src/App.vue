@@ -15,9 +15,12 @@ import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 export default {
   components: { Header, Footer },
-  mounted() {
-    return this.$store.dispatch("fetchProducts");
+  async created(){
+    await this.$store.dispatch("fetchProducts");
+
   },
+  // mounted() {
+  // },
 };
 </script>
 
