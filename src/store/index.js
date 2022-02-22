@@ -15,7 +15,7 @@ export default new Vuex.Store({
       state.email = authData.email
     },
     saveProducts(state, products){
-      state.productsList = products.products
+      state.productsList = products
     },
   },
 

@@ -1,7 +1,7 @@
 <template>
   <div class="CardComponent">
     <div class="CardHolder">
-      <img src="@/assets/images/Piravid.png" alt="Product Card" />
+      <img :src="getImage" alt="Product Card" />
     </div>
     <div class="CardBottom">
       <div class="left">
@@ -20,7 +20,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+    props: ['product'],
+    computed: {
+        getImage(){
+            return require(`@/assets/images/${this.product.imgFile}`)
+        }
+    }
+};
 </script>
 
 <style scoped lang="scss">
@@ -41,7 +48,7 @@ export default {};
   .CardHolder {
     width: 100%;
     height: 80%;
-    background: red;
+    background: whitesmoke;
     img {
       height: 100%;
       width: 100%;
