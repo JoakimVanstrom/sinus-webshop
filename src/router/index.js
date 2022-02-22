@@ -1,41 +1,39 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Cart from '../views/Cart.vue'
-import Product from '../views/SingleProductView.vue'
-import Checkout from '../views/Checkout.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
+import Cart from "../views/Cart.vue";
+import SingleProductView from "../views/SingleProductView.vue";
+import Checkout from "../views/Checkout.vue";
 
+Vue.use(VueRouter);
 
-
-Vue.use(VueRouter)
-
-const routes = [{
-    path: '/',
-    name: 'Home',
-    component: Home
+const routes = [
+  {
+    path: "/",
+    name: "Home",
+    component: Home,
   },
   {
-    path: '/Cart',
-    name: 'Cart',
-    component: Cart
+    path: "/Cart",
+    name: "Cart",
+    component: Cart,
   },
   {
-    path: '/Checkout',
-    name: 'Checkout',
-    component: Checkout
+    path: "/SingleProductView/:id",
+    name: "SingleProductView",
+    component: SingleProductView,
   },
   {
-    path: '/Product',
-    name: 'Product',
-    component: Product
+    path: "/Checkout",
+    name: "Checkout",
+    component: Checkout,
   },
-  ]
-
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
