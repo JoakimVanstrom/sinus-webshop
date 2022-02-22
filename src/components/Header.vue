@@ -3,7 +3,7 @@
     <img src="@/assets/icons/pirateship.png" alt="" />
     <h1>Piravid</h1>
     <div>
-      <img src="@/assets/icons/shopping-cart.svg" alt="" />
+      <img  src="@/assets/icons/shopping-cart.svg" alt="" />
       <img src="@/assets/icons/favorite-heart.svg" alt="" />
       <img src="@/assets/icons/identity.svg" alt="" />
     </div>
