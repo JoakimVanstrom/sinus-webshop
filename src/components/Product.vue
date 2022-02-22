@@ -6,8 +6,8 @@
     <div class="CardBottom">
       <div class="left">
         <div class="content">
-          <h2>{{product.title}} {{product.category}}</h2>
-          <p>{{product.price}}kr</p>
+          <h2>{{ product.title }} {{ product.category }}</h2>
+          <p>{{ product.price }}kr</p>
         </div>
       </div>
       <div class="right">
@@ -21,12 +21,12 @@
 
 <script>
 export default {
-    props: ['product'],
-    computed: {
-        getImage(){
-            return require(`@/assets/images/${this.product.imgFile}`)
-        }
-    }
+  props: ["product"],
+  computed: {
+    getImage() {
+      return require(`@/assets/images/${this.product.imgFile}`);
+    },
+  },
 };
 </script>
 
@@ -67,7 +67,7 @@ export default {
           font-size: 1.1rem;
           padding: 0;
           margin: 0;
-          margin-top: 10px
+          margin-top: 10px;
         }
         p {
           margin-top: 0px;

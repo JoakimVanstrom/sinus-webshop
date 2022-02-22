@@ -1,20 +1,24 @@
 <template>
   <div class="home">
-    <ProductItems v-for="item in products" :key="item.id" :product="item" />
+    <router-link
+      v-for="item in products"
+      :key="item.id"
+      :to="'/SingleProductView/' + item.id"
+    >
+      <Product :product="item" />
+    </router-link>
   </div>
 </template>
 
 <script>
-import ProductItems from '@/components/ProductItems.vue'
+import Product from "@/components/Product.vue";
 export default {
-  components: {ProductItems},
+  components: { Product },
   computed: {
-    products(){
-      return this.$store.state.productsList
-    }
+    products() {
+      return this.$store.state.productsList;
+    },
   },
-  methods: {
-  },
-
-}
+  methods: {},
+};
 </script>
