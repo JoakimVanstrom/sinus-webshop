@@ -67,7 +67,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 .sign-in {
   display: grid;
   place-items: left;

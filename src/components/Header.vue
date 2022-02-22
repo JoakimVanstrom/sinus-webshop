@@ -56,6 +56,9 @@ header {
     grid-column: 9/11;
     grid-row: 2;
     padding-bottom: 0;
+    align-self: end;
+    border: none;
+    outline: none;
   }
 }
 </style>

@@ -6,8 +6,8 @@
     <div class="CardBottom">
       <div class="left">
         <div class="content">
-          <h2>Rumsrena Pjux</h2>
-          <p>1337 kr</p>
+          <h2>{{product.title}} {{product.category}}</h2>
+          <p>{{product.price}}kr</p>
         </div>
       </div>
       <div class="right">
@@ -52,7 +52,7 @@ export default {
     img {
       height: 100%;
       width: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
   }
   .CardBottom {
@@ -64,7 +64,7 @@ export default {
       .content {
         padding: 10px;
         h2 {
-          font-size: 1.3rem;
+          font-size: 1.1rem;
           padding: 0;
           margin: 0;
           margin-top: 10px
