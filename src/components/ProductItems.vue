@@ -6,8 +6,8 @@
     <div class="CardBottom">
       <div class="left">
         <div class="content">
-          <h2>{{product.title}} {{product.category}}</h2>
-          <p>{{product.price}}kr</p>
+          <h2>{{ product.title }} {{ product.category }}</h2>
+          <p>{{ product.price }}kr</p>
         </div>
       </div>
       <div class="right">
@@ -21,12 +21,12 @@
 
 <script>
 export default {
-    props: ['product'],
-    computed: {
-        getImage(){
-            return require(`@/assets/images/${this.product.imgFile}`)
-        }
-    }
+  props: ["product"],
+  computed: {
+    getImage() {
+      return require(`@/assets/images/${this.product.imgFile}`);
+    },
+  },
 };
 </script>
 
@@ -41,6 +41,7 @@ export default {
   box-shadow: 0;
   transform: scale(0.95);
   transition: box-shadow 0.5s, transform 0.5s;
+  cursor: url('~@/assets/icons/David.svg'), auto;
   &:hover {
     transform: scale(1);
     box-shadow: 5px 20px 30px rgba(0, 0, 0, 0.2);
@@ -67,7 +68,7 @@ export default {
           font-size: 1.1rem;
           padding: 0;
           margin: 0;
-          margin-top: 10px
+          margin-top: 10px;
         }
         p {
           margin-top: 0px;
