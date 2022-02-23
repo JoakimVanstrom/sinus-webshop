@@ -1,11 +1,14 @@
 <template>
   <section id="overlay">
     <h2>Favorite Products</h2>
+    <Product  :product="favoriteProduct"/>
   </section>
 </template>
 
 <script>
+import Product from "./Product.vue"
 export default {
+  components: {Product},
   methods: {
     addFavoriteProduct() {
       this.$store.dispatch("addFavoriteProduct");
@@ -13,7 +16,7 @@ export default {
   },
   computed: {
     favoriteProduct() {
-      return this.$store.state.favoriteProduct;
+      return this.$store.state.favoriteProducts[0];
     },
   },
 };

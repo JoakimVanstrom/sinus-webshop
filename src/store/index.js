@@ -9,7 +9,21 @@ export default new Vuex.Store({
     email: null,
     productsList: [],
     overlay: false,
-    favoriteProducts: [],
+    favoriteProducts: [
+      {
+        id: 1337,
+        title: "Fire",
+        specialEdition: false,
+        price: 599,
+        category: "hoodie",
+        shortDesc: "unisex",
+        longDesc: "Coffin rip grip vert snake casper slide Paul Rodriguez.",
+        imgFile: "sinus-hoodie-fire.png",
+        createdAt: "2022-02-21T13:04:44.289Z",
+        updatedAt: "2022-02-21T13:04:44.289Z",
+      },
+    ],
+    showLogin: false,
   },
 
   mutations: {
@@ -24,6 +38,9 @@ export default new Vuex.Store({
     },
     toggleOverlay(state) {
       state.overlay = !state.overlay;
+    },
+    toggleLoginPage(state) {
+      state.showLogin = !state.showLogin;
     },
   },
 
@@ -42,6 +59,9 @@ export default new Vuex.Store({
     },
     toggleOverlay(context) {
       context.commit("toggleOverlay");
+    },
+    toggleLoginPage(context) {
+      context.commit("toggleLoginPage");
     },
   },
 
