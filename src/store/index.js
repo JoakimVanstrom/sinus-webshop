@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     email: null,
-    productsList: []
+    productsList: [],
+    overlay: false,
   },
 
   mutations: {
@@ -17,6 +18,12 @@ export default new Vuex.Store({
     saveProducts(state, products){
       state.productsList = products
     },
+    addFavoriteProduct(state, product){
+      state.favoriteProducts.push(product)
+    },
+    toggleOverlay(state) {
+      state.overlay = !state.overlay
+    }
   },
 
   actions: {
@@ -28,6 +35,12 @@ export default new Vuex.Store({
     async fetchProducts(context){
       const response = await API.getProducts()
       context.commit('saveProducts', response.data)
+    },
+    addFavoriteProduct(context, product){
+      context.commit('addFavoriteProduct', product)
+    },
+    toggleOverlay(context){
+      context.commit('toggleOverlay')
     }
   },
 
