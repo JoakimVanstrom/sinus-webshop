@@ -1,18 +1,45 @@
 <template>
   <div class="SingleProductView">
-    <Product :product="product"/>
+    <div class="MainHead">
+      <div class="HeadContent">
+        <div class="ProductImg">
+          <img :src="getImage" alt="" />
+        </div>
+        <div class="ProductHeadInfo">
+          <h1 class="ProductTitle">
+            {{ product.title }} {{ product.category }}
+          </h1>
+          <p class="PiravidQuote">
+            The perfect fit for a pirate like yourself! - David "Piravid"
+            Lundholm
+          </p>
+          <div class="ProductPrice">
+            <button class="BuyButton">Röva den!</button>
+            <h2>1337 kr</h2>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="ProductMain">
+      <div class="ProductDesc">
+        <p>
+          {{ product.longDesc }}
+        </p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import Product from '@/components/Product.vue'
 export default {
-  components: {Product},
   computed: {
     product() {
-       return this.$store.state.productsList.find(
+      return this.$store.state.productsList.find(
         (product) => product.id == this.$route.params.id
       );
+    },
+    getImage() {
+      return require(`@/assets/images/${this.product.imgFile}`);
     },
   },
 };
@@ -42,6 +69,15 @@ export default {
       height: 500px;
       background-color: black;
       transform: translateY(30%);
+      display: flex;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        justify-self: flex-end;
+        align-self: flex-end;
+      }
     }
 
     .ProductHeadInfo {
@@ -49,7 +85,7 @@ export default {
       display: flex;
       flex-direction: column;
       margin-top: auto;
-      margin-bottom: 40px;
+      margin-bottom: 10px;
       margin-left: 20px;
 
       .ProductTitle {
@@ -57,7 +93,7 @@ export default {
         color: #ffffff;
       }
       .PiravidQuote {
-        margin-top: 0;
+        margin-top: -20px;
         width: 58%;
         color: #ffffff;
         text-align: right;
@@ -68,6 +104,7 @@ export default {
         flex-direction: row;
         width: 50%;
         height: 50px;
+        margin-top: 80px;
         justify-content: space-between;
 
         .BuyButton {
@@ -80,7 +117,7 @@ export default {
           padding: 10px;
           border-radius: 5px;
           border: none;
-          cursor: url('~@/assets/icons/David.svg'), auto;
+          cursor: url("~@/assets/icons/David.svg"), auto;
           margin-top: auto;
           margin-bottom: auto;
         }
