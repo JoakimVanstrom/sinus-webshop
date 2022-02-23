@@ -32,18 +32,16 @@
 
 <script>
 export default {
-  methods: {
-    addToCart() {
-      this.$store.dispatch("addToCart", this.product);
-    },
-  },
    data() {
     return {
       path: "http://localhost:5000/images/",
     };
   },
-
-
+  methods: {
+    addToCart() {
+      this.$store.dispatch("addToCart", this.product);
+    },
+  },
   computed: {
     product() {
       return this.$store.state.productsList.find(
