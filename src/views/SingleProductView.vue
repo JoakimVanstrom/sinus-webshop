@@ -80,7 +80,7 @@ export default {
           padding: 10px;
           border-radius: 5px;
           border: none;
-          cursor: pointer;
+          cursor: url('~@/assets/icons/David.svg'), auto;
           margin-top: auto;
           margin-bottom: auto;
         }
@@ -94,16 +94,18 @@ export default {
 }
 .ProductMain {
   background-color: #cacaca;
-  height: 50vh;
-  width: 100%;
+  height: 100vh;
+  width: 55%;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 0;
   padding: 0;
 
   .ProductDesc {
     margin-top: 10px;
-    width: 30%;
+    width: 50%;
     margin-left: auto;
-    margin-right: 25.5%;
+    margin-right: 10%;
     margin-top: 0;
 
     p {

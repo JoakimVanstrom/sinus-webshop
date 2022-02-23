@@ -41,6 +41,7 @@ export default {
   box-shadow: 0;
   transform: scale(0.95);
   transition: box-shadow 0.5s, transform 0.5s;
+  cursor: url('~@/assets/icons/David.svg'), auto;
   &:hover {
     transform: scale(1);
     box-shadow: 5px 20px 30px rgba(0, 0, 0, 0.2);
