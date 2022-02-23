@@ -24,7 +24,13 @@
     <div class="main">
       <h1>Havets Bästa Deals!</h1>
       <div class="productLibrary">
-        <Product v-for="item in products" :key="item.id" :product="item" />
+        <router-link
+          v-for="item in products"
+          :key="item.id"
+          :to="'/SingleProductView/' + item.id"
+        >
+          <Product :product="item" />
+        </router-link>
       </div>
     </div>
   </div>
@@ -116,7 +122,7 @@ export default {
             font-weight: bold;
             font-size: 1.2rem;
             line-height: 25px;
-            cursor: url('~@/assets/icons/David.svg'), auto;
+            cursor: url("~@/assets/icons/David.svg"), auto;
             transition: background-color 0.5s;
             &:hover {
               background-color: rgb(255, 97, 97);
