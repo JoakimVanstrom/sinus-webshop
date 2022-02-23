@@ -3,7 +3,7 @@
     <div class="MainHead">
       <div class="HeadContent">
         <div class="ProductImg">
-          <img :src="path + product.imgFile" alt="" />
+          <img :src="path + product.imgFile" alt=""/>
         </div>
         <div class="ProductHeadInfo">
           <h1 class="ProductTitle">
@@ -14,7 +14,7 @@
             Lundholm
           </p>
           <div class="ProductPrice">
-            <button class="BuyButton">Röva den!</button>
+            <button @click="addToCart()" class="BuyButton">Röva den!</button>
             <h2>1337 kr</h2>
           </div>
         </div>
@@ -32,11 +32,17 @@
 
 <script>
 export default {
+  methods: {
+    addToCart() {
+      this.$store.dispatch("addToCart", this.product);
+    },
+  },
    data() {
     return {
       path: "http://localhost:5000/images/",
     };
   },
+
 
   computed: {
     product() {
@@ -123,6 +129,10 @@ export default {
           cursor: url("~@/assets/icons/David.svg"), auto;
           margin-top: auto;
           margin-bottom: auto;
+           &:active {
+            background-color: peachpuff;
+            color: #ffffff;
+            }
         }
         h2 {
           font-size: 1.2rem;
