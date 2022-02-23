@@ -5,7 +5,7 @@
     </div>
 
     <div class="CardHolder">
-      <img :src="getImage" alt="Product Card" />
+      <img :src="path + product.imgFile" alt=""/>
     </div>
     <div class="CardBottom">
       <div class="left">
@@ -26,11 +26,16 @@
 <script>
 export default {
   props: ["product"],
-  computed: {
+  data() {
+    return {
+      path: "http://localhost:5000/images/",
+    };
+  },
+  /* computed: {
     getImage() {
       return require(`../../../sinus-backend/sinus-backend/public/images/${this.product.imgFile}`);
     },
-  },
+  }, */
 };
 </script>
 
