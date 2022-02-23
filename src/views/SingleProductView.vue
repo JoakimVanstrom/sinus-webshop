@@ -3,7 +3,7 @@
     <div class="MainHead">
       <div class="HeadContent">
         <div class="ProductImg">
-          <img :src="getImage" alt="" />
+          <img :src="path + product.imgFile" alt="" />
         </div>
         <div class="ProductHeadInfo">
           <h1 class="ProductTitle">
@@ -32,6 +32,12 @@
 
 <script>
 export default {
+   data() {
+    return {
+      path: "http://localhost:5000/images/",
+    };
+  },
+
   computed: {
     product() {
       return this.$store.state.productsList.find(
