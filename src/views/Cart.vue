@@ -7,8 +7,11 @@
     <h1 class="h1">Mina Piravidsar</h1>
 
     <section class="products">
-      <div>product 1</div>
-      <div>product 2</div>
+      <p v-for="item in cart" :key="item.id">
+        <img :src="path + item.imgFile" alt="" />
+
+        {{ item.title }}
+      </p>
     </section>
 
     <div class="checkout">
@@ -26,7 +29,19 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      path: "http://localhost:5000/images/",
+    };
+  },
+
+  computed: {
+    cart() {
+      return this.$store.state.cart;
+    },
+  },
+};
 </script>
 
 <style scoped>

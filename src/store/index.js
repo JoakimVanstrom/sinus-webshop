@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     email: null,
     productsList: [],
+    cart: [],
     overlay: false,
     favoriteProducts: [
       {
@@ -42,6 +43,10 @@ export default new Vuex.Store({
     toggleLoginPage(state) {
       state.showLogin = !state.showLogin;
     },
+    addToCart(state, product) {
+      state.cart.push(product);
+    },
+
   },
 
   actions: {
@@ -62,6 +67,9 @@ export default new Vuex.Store({
     },
     toggleLoginPage(context) {
       context.commit("toggleLoginPage");
+    },
+    addToCart(context, product) {
+      context.commit("addToCart", product);
     },
   },
 
