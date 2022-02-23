@@ -13,3 +13,4 @@ export async function login(email, password){
 export async function getProducts(){
     return await axios.get('/items')
 }
+
