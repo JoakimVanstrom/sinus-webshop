@@ -6,16 +6,16 @@
 
 <script>
 export default {
-  /* methods: {
+  methods: {
     addFavoriteProduct() {
       this.$store.dispatch("addFavoriteProduct");
     },
   },
-    computed: {
+  computed: {
     favoriteProduct() {
       return this.$store.state.favoriteProduct;
     },
-  }, */
+  },
 };
 </script>
 

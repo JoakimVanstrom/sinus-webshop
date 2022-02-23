@@ -1,13 +1,11 @@
 <template>
   <header class="header">
     <img src="@/assets/icons/pirateship.png" alt="" />
-    <router-link  class="head-title" to="/"><h1>Piravid</h1></router-link>
-    <h1>Piravid</h1>
+    <router-link class="head-title" to="/"><h1>Piravid</h1></router-link>
+
     <Favorite v-if="overlay" :product="product" />
     <div>
-      <img src="@/assets/icons/shopping-cart.svg" alt="" 
-      @click="Cart"
-      />
+      <img src="@/assets/icons/shopping-cart.svg" alt="" @click="Cart" />
 
       <img
         @click="toggleOverlay"
@@ -83,18 +81,18 @@ header {
     outline: none;
   }
 }
-  .head-title {
-    grid-row: 1/3;
-    grid-column: 7/10;
-    align-self: center;
-    margin-left: 50%;
-    font-family: "Pirata One", cursive;
-    color: white;
-    font-size: 40px;
+.head-title {
+  grid-row: 1/3;
+  grid-column: 7/10;
+  align-self: center;
+  margin-left: 50%;
+  font-family: "Pirata One", cursive;
+  color: white;
+  font-size: 40px;
+  margin: 0;
+  text-decoration: none;
+  h1 {
     margin: 0;
-    text-decoration: none;
-    h1{
-      margin: 0;
-    }
   }
+}
 </style>
