@@ -1,40 +1,21 @@
 <template>
   <div class="SingleProductView">
-    <div class="MainHead">
-      <div class="HeadContent">
-        <div class="ProductImg">
-          <!--<img :src="product.image" alt="">-->
-        </div>
-        <div class="ProductHeadInfo">
-          <h1 class="ProductTitle">Placeholder Title</h1>
-          <p class="PiravidQuote">
-            The perfect fit for a pirate like yourself! - David "Piravid"
-            Lundholm
-          </p>
-          <div class="ProductPrice">
-            <button class="BuyButton">Röva den!</button>
-            <h2>1337 kr</h2>
-          </div>
-        </div>
-      </div>
+    <Product :product="product"/>
     </div>
-    <div class="ProductMain">
-      <div class="ProductDesc">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus dicta
-          at quos magni eveniet, odio eos nesciunt, consectetur dignissimos
-          dolor vero quis quisquam eius. Accusamus suscipit atque harum magnam
-          autem assumenda non inventore voluptatum? Tenetur voluptas perferendis
-          dolorum qui numquam aliquam quos obcaecati rem veniam, esse placeat
-          reprehenderit corporis odit!
-        </p>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
-export default {};
+import Product from '@/components/Product.vue'
+export default {
+  components: {Product},
+  computed: {
+    product() {
+       return this.$store.state.productsList.find(
+        (product) => product.id == this.$route.params.id
+      );
+    },
+  },
+};
 </script>
 
 <style lang="scss">
