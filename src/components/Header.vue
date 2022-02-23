@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <img src="@/assets/icons/pirateship.png" alt="" />
-    <h1>Piravid</h1>
+    <router-link  class="head-title" to="/"><h1>Piravid</h1></router-link>
     <div>
       <img  src="@/assets/icons/shopping-cart.svg" alt="" />
       <img src="@/assets/icons/favorite-heart.svg" alt="" />
@@ -32,16 +32,7 @@ header {
     padding: 1rem 0;
     justify-self: center;
   }
-  h1 {
-    grid-row: 1/3;
-    grid-column: 7/10;
-    align-self: center;
-    margin-left: 50%;
-    font-family: "Pirata One", cursive;
-    color: white;
-    font-size: 64px;
-    margin: 0;
-  }
+
   div {
     grid-column: 9/11;
     grid-row: 1;
@@ -61,4 +52,18 @@ header {
     outline: none;
   }
 }
+  .head-title {
+    grid-row: 1/3;
+    grid-column: 7/10;
+    align-self: center;
+    margin-left: 50%;
+    font-family: "Pirata One", cursive;
+    color: white;
+    font-size: 40px;
+    margin: 0;
+    text-decoration: none;
+    h1{
+      margin: 0;
+    }
+  }
 </style>
