@@ -44,9 +44,6 @@ export default {
         (product) => product.id == this.$route.params.id
       );
     },
-    getImage() {
-      return require(`@/assets/images/${this.product.imgFile}`);
-    },
   },
 };
 </script>
