@@ -24,16 +24,16 @@
     <div class="main">
       <h1>Havets Bästa Deals!</h1>
       <div class="productLibrary">
-        <ProductItems v-for="item in products" :key="item.id" :product="item" />
+        <Product v-for="item in products" :key="item.id" :product="item" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ProductItems from "@/components/ProductItems.vue";
+import Product from "@/components/Product.vue";
 export default {
-  components: { ProductItems },
+  components: { Product },
   computed: {
     products() {
       return this.$store.state.productsList;
