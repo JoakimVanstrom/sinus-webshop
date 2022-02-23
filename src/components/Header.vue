@@ -2,9 +2,17 @@
   <header class="header">
     <img src="@/assets/icons/pirateship.png" alt="" />
     <h1>Piravid</h1>
+    <Favorite v-if="overlay" :product="product" />
     <div>
-      <img  src="@/assets/icons/shopping-cart.svg" alt="" />
-      <img src="@/assets/icons/favorite-heart.svg" alt="" />
+      <img src="@/assets/icons/shopping-cart.svg" alt="" 
+      @click="Cart"
+      />
+
+      <img
+        @click="toggleOverlay"
+        src="@/assets/icons/favorite-heart.svg"
+        alt=""
+      />
       <img src="@/assets/icons/identity.svg" alt="" />
     </div>
     <input type="text" />
@@ -12,7 +20,29 @@
 </template>
 
 <script>
-export default {};
+import Favorite from "@/components/Favorite.vue";
+export default {
+  components: { Favorite },
+  methods: {
+    toggleOverlay() {
+      this.$store.dispatch("toggleOverlay");
+    },
+    Cart() {
+      this.$router.push("/Cart");
+    },
+    addFavoriteProduct() {
+      this.$store.dispatch("addFavoriteProduct");
+    },
+  },
+  computed: {
+    overlay() {
+      return this.$store.state.overlay;
+    },
+    favoriteProduct() {
+      return this.$store.state.favoriteProduct;
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
