@@ -3,7 +3,8 @@
     <img src="@/assets/icons/pirateship.png" alt="" />
     <router-link class="head-title" to="/"><h1>Piravid</h1></router-link>
 
-    <Favorite v-if="overlay" :product="product" />
+    <Favorite v-if="overlay" />
+    <Login v-if="showLoginPage"/>
     <div>
       <img src="@/assets/icons/shopping-cart.svg" alt="" @click="Cart" />
 
@@ -12,7 +13,7 @@
         src="@/assets/icons/favorite-heart.svg"
         alt=""
       />
-      <img src="@/assets/icons/identity.svg" alt="" />
+      <img @click="toggleLoginPage" src="@/assets/icons/identity.svg" alt="" />
     </div>
     <input type="text" />
   </header>
@@ -20,11 +21,15 @@
 
 <script>
 import Favorite from "@/components/Favorite.vue";
+import Login from "@/components/Login.vue"
 export default {
-  components: { Favorite },
+  components: { Favorite, Login },
   methods: {
     toggleOverlay() {
       this.$store.dispatch("toggleOverlay");
+    },
+    toggleLoginPage() {
+      this.$store.dispatch("toggleLoginPage");
     },
     Cart() {
       this.$router.push("/Cart");
@@ -37,9 +42,9 @@ export default {
     overlay() {
       return this.$store.state.overlay;
     },
-    favoriteProduct() {
-      return this.$store.state.favoriteProduct;
-    },
+    showLoginPage(){
+      return this.$store.state.showLogin
+    }
   },
 };
 </script>

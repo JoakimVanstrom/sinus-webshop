@@ -28,7 +28,7 @@ export default {
   props: ["product"],
   computed: {
     getImage() {
-      return require(`@/assets/images/${this.product.imgFile}`);
+      return require(`../../../sinus-backend/sinus-backend/public/images/${this.product.imgFile}`);
     },
   },
 };
