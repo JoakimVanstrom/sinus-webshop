@@ -10,11 +10,11 @@
       <h2>Price</h2>
     </div>
 
-    <section v-for="item in cart" :key="item.id" class="products">
+    <section v-for="item in cartGetter" :key="item.id" class="products">
       <img :src="path + item.imgFile" alt="" width="10%" />
       <h3>Piravid {{ item.category }}</h3>
-      <button> - </button>
-      <button> + </button>
+      <button @click="decrementBtn(product)"> - </button>
+      <button @click="incrmeentBtn(product)"> + </button>
       <h1>0</h1>
       <h3>{{ item.price }} SEK</h3>
     </section>
@@ -35,11 +35,25 @@ export default {
       path: "http://localhost:5000/images/",
     };
   },
+  methods: {
+    decrementBtn(product) {
+      this.$store.dispatch("decrementBtn", product);
+    },
+    incrmeentBtn(product) {
+      this.$store.dispatch("incrementBtn", product);
+    },
+  },
 
   computed: {
     cart() {
       return this.$store.state.cart;
     },
+    cartGetter() {
+      return this.$store.getters.cart;
+    },
+    /* cartTotal() {
+      return this.$store.getters.total;
+    }, */
   },
 };
 </script>

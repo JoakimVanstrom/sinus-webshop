@@ -9,6 +9,7 @@ export default new Vuex.Store({
     email: null,
     productsList: [],
     cart: [],
+    products: {},
     overlay: false,
     favoriteProducts: [
       {
@@ -32,7 +33,11 @@ export default new Vuex.Store({
       state.email = authData.email;
     },
     saveProducts(state, products) {
-      state.productsList = products;
+      /*  state.productsList = products; */
+      for (let product of products) {
+        state.productsList.push(product);
+        Vue.set(state.products, product.id, product);
+      }
     },
     addFavoriteProduct(state, product) {
       state.favoriteProducts.push(product);
@@ -44,12 +49,25 @@ export default new Vuex.Store({
       state.showLogin = !state.showLogin;
     },
     addToCart(state, product) {
-      // prevents dublicates
-      if (!state.cart.includes(product)) {
+      /* if (!state.cart.includes(product)) {
         state.cart.push(product);
-      } /* else {
-        state.cart[state.cart.indexOf(product)].amount++;
-      } */
+      }  */
+      const inCart = state.cart.find((cartItem) => cartItem.id === product.id);
+      if (inCart) {
+        inCart.amount++;
+      } else {
+        state.cart.push({ id: product.id, amount: 1 });
+      }
+    },
+    updateCartItem(state, { id, amount }) {
+      const inCart = state.cart.find((cartItem) => cartItem.id == id);
+      inCart.amount = amount;
+    },
+    incrementBtn(state, product) {
+      state.cart[state.cart.indexOf(product)].amount++;
+    },
+    decrementBtn(state, product) {
+      state.cart[state.cart.indexOf(product)].amount--;
     },
   },
 
@@ -72,10 +90,37 @@ export default new Vuex.Store({
     toggleLoginPage(context) {
       context.commit("toggleLoginPage");
     },
-    addToCart(context, product) {
+    addToCart({commit}, product) {
+      commit("addToCart", product);
+    },
+    updateCartItem({commit}, {id, amount}){
+      commit("updateCartItem", {id, amount});
+    },
+
+    /* addToCart(context, product) {
       context.commit("addToCart", product);
+    }, */
+
+
+
+
+    decrementBtn(context, product) {
+      context.commit("decrementBtn", product);
+    },
+    incrementBtn(context, product) {
+      context.commit("incrementBtn", product);
     },
   },
 
+  getters: {
+    cart(state) {
+      return state.cart.map((product) => ({
+        id: product.id,
+        title: state.products[product.id].title,
+        imgFile: state.products[product.id].imgFile,
+        amount: product.amount,
+      }));
+    },
+  },
   modules: {},
 });
