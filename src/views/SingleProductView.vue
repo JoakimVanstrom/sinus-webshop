@@ -15,7 +15,7 @@
           </p>
           <div class="ProductPrice">
             <button @click="addToCart()" class="BuyButton">Röva den!</button>
-            <h2>1337 kr</h2>
+            <h2>{{ product.price }} kr</h2> 
           </div>
         </div>
       </div>

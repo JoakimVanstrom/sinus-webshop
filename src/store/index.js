@@ -43,14 +43,11 @@ export default new Vuex.Store({
       } else {
         state.cart.push({
           id: product.id,
-          amount: 1
+          amount: 1,
         });
       }
     },
-    updateCartItem(state, {
-      id,
-      amount
-    }) {
+    updateCartItem(state, { id, amount }) {
       const inCart = state.cart.find((cartItem) => cartItem.id == id);
       inCart.amount = amount;
     },
@@ -60,13 +57,19 @@ export default new Vuex.Store({
     decrementBtn(state, product) {
       state.cart[state.cart.indexOf(product)].amount--;
     },
+    removeFromCart(state, product) {
+      state.cart.splice(state.cart.indexOf(product), 1);
+    },
   },
 
   actions: {
     async authenticate(context, credentials) {
       const response = await API.login(credentials.email, credentials.password);
       API.saveToken(response.data.token);
-      context.commit("saveAuthData", response.data);
+      const myData = await API.getMyInfo()
+      console.log(myData) 
+      console.log(response.data)
+      context.commit("saveAuthData", myData.data);
     },
     async fetchProducts(context) {
       const response = await API.getProducts();
@@ -83,20 +86,13 @@ export default new Vuex.Store({
     toggleLoginPage(context) {
       context.commit("toggleLoginPage");
     },
-    addToCart({
-      commit
-    }, product) {
+    addToCart({ commit }, product) {
       commit("addToCart", product);
     },
-    updateCartItem({
-      commit
-    }, {
-      id,
-      amount
-    }) {
+    updateCartItem({ commit }, { id, amount }) {
       commit("updateCartItem", {
         id,
-        amount
+        amount,
       });
     },
     decrementBtn(context, product) {
@@ -105,6 +101,9 @@ export default new Vuex.Store({
     incrementBtn(context, product) {
       context.commit("incrementBtn", product);
     },
+    removeFromCart({ commit }, product) {
+      commit("removeFromCart", product);
+    }
   },
 
   getters: {
@@ -122,7 +121,7 @@ export default new Vuex.Store({
       return state.cart.reduce((total, product) => {
         return total + product.amount * state.products[product.id].price;
       }, 0);
-    }
+    },
   },
   modules: {},
 });

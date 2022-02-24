@@ -4,7 +4,6 @@
     <router-link class="head-title" to="/"><h1>Piravid</h1></router-link>
 
     <Favorite v-if="overlay" />
-    <Login v-if="showLoginPage"/>
     <div>
       <img src="@/assets/icons/shopping-cart.svg" alt="" @click="Cart" />
 
@@ -13,7 +12,9 @@
         src="@/assets/icons/favorite-heart.svg"
         alt=""
       />
-      <img @click="toggleLoginPage" src="@/assets/icons/identity.svg" alt="" />
+      <router-link to="/login"
+        ><img src="@/assets/icons/identity.svg" alt=""
+      /></router-link>
     </div>
     <input type="text" />
   </header>
@@ -21,9 +22,8 @@
 
 <script>
 import Favorite from "@/components/Favorite.vue";
-import Login from "@/components/Login.vue"
 export default {
-  components: { Favorite, Login },
+  components: { Favorite },
   methods: {
     toggleOverlay() {
       this.$store.dispatch("toggleOverlay");
@@ -42,9 +42,9 @@ export default {
     overlay() {
       return this.$store.state.overlay;
     },
-    showLoginPage(){
-      return this.$store.state.showLogin
-    }
+    showLoginPage() {
+      return this.$store.state.showLogin;
+    },
   },
 };
 </script>
@@ -58,6 +58,7 @@ header {
   display: grid;
   grid-template-columns: repeat(13, 1fr);
   grid-template-rows: auto;
+  z-index: 0;
   img {
     grid-row: 1/3;
     grid-column: 5/5;
@@ -86,6 +87,14 @@ header {
     outline: none;
   }
 }
+.login-page {
+  display: grid;
+  z-index: 3;
+  position: absolute;
+  top: 60px;
+  left: 1500px;
+}
+
 .head-title {
   grid-row: 1/3;
   grid-column: 7/10;

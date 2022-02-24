@@ -18,7 +18,8 @@
       </div>
       <div class="right">
         <button>
-          <img src="@/assets/icons/risk-skull-2.png" alt="" />Pirate It!
+          <img src="@/assets/icons/risk-skull-2.png" alt="" />
+          Pirate It!
         </button>
       </div>
     </div>
