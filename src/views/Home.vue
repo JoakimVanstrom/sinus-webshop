@@ -159,6 +159,7 @@ export default {
     display: flex;
     height: 100%;
     flex-wrap: wrap;
+    
   }
 }
 </style>

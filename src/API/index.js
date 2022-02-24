@@ -9,6 +9,9 @@ export function saveToken(token){
 export async function login(email, password){
     return await axios.post('/auth', {email, password})
 }
+export async function getMyInfo(){
+    return await axios.get('/me')
+}
 
 export async function getProducts(){
     return await axios.get('/items')
