@@ -11,20 +11,18 @@ export default new Vuex.Store({
     cart: [],
     products: {},
     overlay: false,
-    favoriteProducts: [
-      {
-        id: 1337,
-        title: "Fire",
-        specialEdition: false,
-        price: 599,
-        category: "hoodie",
-        shortDesc: "unisex",
-        longDesc: "Coffin rip grip vert snake casper slide Paul Rodriguez.",
-        imgFile: "sinus-hoodie-fire.png",
-        createdAt: "2022-02-21T13:04:44.289Z",
-        updatedAt: "2022-02-21T13:04:44.289Z",
-      },
-    ],
+    favoriteProducts: [{
+      id: 1337,
+      title: "Fire",
+      specialEdition: false,
+      price: 599,
+      category: "hoodie",
+      shortDesc: "unisex",
+      longDesc: "Coffin rip grip vert snake casper slide Paul Rodriguez.",
+      imgFile: "sinus-hoodie-fire.png",
+      createdAt: "2022-02-21T13:04:44.289Z",
+      updatedAt: "2022-02-21T13:04:44.289Z",
+    }, ],
     showLogin: false,
   },
 
@@ -33,7 +31,6 @@ export default new Vuex.Store({
       state.email = authData.email;
     },
     saveProducts(state, products) {
-      /*  state.productsList = products; */
       for (let product of products) {
         state.productsList.push(product);
         Vue.set(state.products, product.id, product);
@@ -56,10 +53,16 @@ export default new Vuex.Store({
       if (inCart) {
         inCart.amount++;
       } else {
-        state.cart.push({ id: product.id, amount: 1 });
+        state.cart.push({
+          id: product.id,
+          amount: 1
+        });
       }
     },
-    updateCartItem(state, { id, amount }) {
+    updateCartItem(state, {
+      id,
+      amount
+    }) {
       const inCart = state.cart.find((cartItem) => cartItem.id == id);
       inCart.amount = amount;
     },
@@ -90,20 +93,22 @@ export default new Vuex.Store({
     toggleLoginPage(context) {
       context.commit("toggleLoginPage");
     },
-    addToCart({commit}, product) {
+    addToCart({
+      commit
+    }, product) {
       commit("addToCart", product);
     },
-    updateCartItem({commit}, {id, amount}){
-      commit("updateCartItem", {id, amount});
+    updateCartItem({
+      commit
+    }, {
+      id,
+      amount
+    }) {
+      commit("updateCartItem", {
+        id,
+        amount
+      });
     },
-
-    /* addToCart(context, product) {
-      context.commit("addToCart", product);
-    }, */
-
-
-
-
     decrementBtn(context, product) {
       context.commit("decrementBtn", product);
     },
@@ -116,11 +121,18 @@ export default new Vuex.Store({
     cart(state) {
       return state.cart.map((product) => ({
         id: product.id,
+        category: state.products[product.id].category,
         title: state.products[product.id].title,
         imgFile: state.products[product.id].imgFile,
+        price: state.products[product.id].price,
         amount: product.amount,
       }));
     },
+    totalPrice(state) {
+      return state.cart.reduce((total, product) => {
+        return total + product.amount * state.products[product.id].price;
+      }, 0);
+    }
   },
   modules: {},
 });

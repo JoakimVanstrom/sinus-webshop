@@ -12,9 +12,9 @@
 
     <section v-for="item in cartGetter" :key="item.id" class="products">
       <img :src="path + item.imgFile" alt="" width="10%" />
-      <h3>Piravid {{ item.category }}</h3>
-      <button @click="decrementBtn(product)">-</button>
-      <button @click="incrementBtn(product)">+</button>
+      <h3>Piravid {{ item.title }} {{ item.category }}</h3>
+      <button @click="decrementBtn(item)">-</button>
+      <button @click="incrementBtn(item)">+</button>
       <h1>{{ item.amount }}</h1>
       <h3>{{ item.price }} SEK</h3>
     </section>
@@ -22,7 +22,7 @@
     <div class="checkout">
       <h1>Order Details</h1>
       <h2>Total cost</h2>
-      <p>1337 SEK</p>
+      <p>{{ cartTotal }} kr</p>
       <button><router-link to="/Checkout">Checkout</router-link></button>
     </div>
   </main>
@@ -37,14 +37,13 @@ export default {
   },
   methods: {
     decrementBtn(item) {
-      console.log(item);
-      this.$store.dispatch("updateCart", {
+      this.$store.dispatch("updateCartItem", {
         id: item.id,
         amount: item.amount - 1,
       });
     },
     incrementBtn(item) {
-      this.$store.dispatch("updateCart", {
+      this.$store.dispatch("updateCartItem", {
         id: item.id,
         amount: item.amount + 1,
       });
@@ -58,9 +57,9 @@ export default {
     cartGetter() {
       return this.$store.getters.cart;
     },
-    /* cartTotal() {
-      return this.$store.getters.total;
-    }, */
+    cartTotal() {
+      return this.$store.getters.totalPrice;
+    },
   },
 };
 </script>
