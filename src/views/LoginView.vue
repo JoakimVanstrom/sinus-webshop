@@ -1,36 +1,44 @@
 <template>
 <div>
-<div class="login-background"></div>
   <div class="container">
     <h4>Log in</h4>
-    <form submit.prevent>
+    <form @submit.prevent="login">
       <label>Email</label>
-      <input type="email" />
+      <input type="text" v-model="email" placeholder="Email"/>
       <label>Password</label>
-      <input type="password" />
-      <button>Log in / Create user</button>
+      <input type="password" v-model="password" placeholder="Password"/>
+      <button>Log in</button>
     </form>
+     <p v-if="userEmail">Logged in as: {{userEmail}}</p>
   </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data(){return{
+    email: "admin@example.com",
+    password: "password",
+  }},
+  computed: {
+      userEmail(){
+      return this.$store.state.email
+    },
+  },
+  methods: {
+      login(){
+      this.$store.dispatch('authenticate',
+      {email: this.email, password: this.password}
+      )
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-.login-background {
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 4;
-}
+
 .container {
   display: grid;
-  z-index: 5;
   background-color: whitesmoke;
   h4 {
     text-align: center;

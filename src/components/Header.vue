@@ -1,5 +1,4 @@
 <template>
-
   <header class="header">
     <img src="@/assets/icons/pirateship.png" alt="" />
     <router-link class="head-title" to="/"><h1>Piravid</h1></router-link>
@@ -13,19 +12,18 @@
         src="@/assets/icons/favorite-heart.svg"
         alt=""
       />
-      <img class="login-icon" @click="toggleLoginPage" src="@/assets/icons/identity.svg" alt="" />
+      <router-link to="/login"
+        ><img src="@/assets/icons/identity.svg" alt=""
+      /></router-link>
     </div>
     <input type="text" />
-    <Login class="login-page" v-if="showLoginPage"/>
   </header>
-
 </template>
 
 <script>
 import Favorite from "@/components/Favorite.vue";
-import Login from "@/components/Login.vue"
 export default {
-  components: { Favorite, Login },
+  components: { Favorite },
   methods: {
     toggleOverlay() {
       this.$store.dispatch("toggleOverlay");
@@ -44,9 +42,9 @@ export default {
     overlay() {
       return this.$store.state.overlay;
     },
-    showLoginPage(){
-      return this.$store.state.showLogin
-    }
+    showLoginPage() {
+      return this.$store.state.showLogin;
+    },
   },
 };
 </script>
@@ -88,15 +86,13 @@ header {
     border: none;
     outline: none;
   }
-  .login-icon{
-  z-index: 6;
 }
-}
-.login-page{
+.login-page {
   display: grid;
   z-index: 3;
- position:absolute;
- top: 60px; left: 1500px;
+  position: absolute;
+  top: 60px;
+  left: 1500px;
 }
 
 .head-title {

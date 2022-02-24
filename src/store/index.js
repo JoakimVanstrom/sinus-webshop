@@ -24,7 +24,6 @@ export default new Vuex.Store({
         updatedAt: "2022-02-21T13:04:44.289Z",
       },
     ],
-    showLogin: false,
   },
 
   mutations: {
@@ -46,14 +45,16 @@ export default new Vuex.Store({
     addToCart(state, product) {
       state.cart.push(product);
     },
-
   },
 
   actions: {
     async authenticate(context, credentials) {
       const response = await API.login(credentials.email, credentials.password);
       API.saveToken(response.data.token);
-      context.commit("saveAuthData", response.data);
+      const myData = await API.getMyInfo()
+      console.log(myData) 
+      console.log(response.data)
+      context.commit("saveAuthData", myData.data);
     },
     async fetchProducts(context) {
       const response = await API.getProducts();
