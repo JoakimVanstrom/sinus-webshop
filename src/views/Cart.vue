@@ -13,9 +13,9 @@
     <section v-for="item in cartGetter" :key="item.id" class="products">
       <img :src="path + item.imgFile" alt="" width="10%" />
       <h3>Piravid {{ item.category }}</h3>
-      <button @click="decrementBtn(product)"> - </button>
-      <button @click="incrmeentBtn(product)"> + </button>
-      <h1>0</h1>
+      <button @click="decrementBtn(product)">-</button>
+      <button @click="incrementBtn(product)">+</button>
+      <h1>{{ item.amount }}</h1>
       <h3>{{ item.price }} SEK</h3>
     </section>
 
@@ -36,11 +36,18 @@ export default {
     };
   },
   methods: {
-    decrementBtn(product) {
-      this.$store.dispatch("decrementBtn", product);
+    decrementBtn(item) {
+      console.log(item);
+      this.$store.dispatch("updateCart", {
+        id: item.id,
+        amount: item.amount - 1,
+      });
     },
-    incrmeentBtn(product) {
-      this.$store.dispatch("incrementBtn", product);
+    incrementBtn(item) {
+      this.$store.dispatch("updateCart", {
+        id: item.id,
+        amount: item.amount + 1,
+      });
     },
   },
 
@@ -73,7 +80,6 @@ export default {
   grid-gap: 10px;
   border-bottom: 1px solid #000;
 }
-
 
 .checkout {
   display: flex;
@@ -114,14 +120,14 @@ a {
     background: rgb(214, 209, 209);
   }
   button {
-  background-color: #e83f57;
-  color: white;
-  border: none;
-  margin: 5px;
-  padding: 5px;
-  width: 20px;
-  border-radius: 1px;
-  cursor: pointer;
+    background-color: #e83f57;
+    color: white;
+    border: none;
+    margin: 5px;
+    padding: 5px;
+    width: 20px;
+    border-radius: 1px;
+    cursor: pointer;
   }
   h3 {
     margin-left: 25px;
