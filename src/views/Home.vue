@@ -26,13 +26,7 @@
     <div class="main">
       <h1>Havets Bästa Deals!</h1>
       <div class="productLibrary">
-        <router-link
-          v-for="item in products"
-          :key="item.id"
-          :to="'/SingleProductView/' + item.id"
-        >
-          <Product :product="item" />
-        </router-link>
+        <Product v-for="item in products" :key="item.id" :product="item" />
       </div>
     </div>
   </div>
@@ -53,13 +47,13 @@ export default {
 
 <style scoped lang="scss">
 .home {
-  width: 100%;
+  max-width: 1920px;
   font-family: Open, sans-serif;
 }
 .head {
   display: flex;
   height: 400px;
-  width: 100%;
+  max-width: 1920px;
   background-color: rgba(161, 0, 0, 0.7);
   margin-left: auto;
   margin-right: auto;
@@ -70,7 +64,7 @@ export default {
     margin-left: auto;
     margin-right: auto;
     .hero {
-      width: 50%;
+      max-width: 50%;
       height: 350px;
       margin-top: auto;
       img {
@@ -80,13 +74,13 @@ export default {
       }
     }
     .rightside {
-      width: 50%;
+      max-width: 50%;
       .headtop {
         display: flex;
         flex-direction: column;
         padding: 2rem;
         margin-top: 3%;
-        width: 100%;
+        max-width: 100%;
         h1 {
           font-size: 2rem;
           color: white;
@@ -103,7 +97,7 @@ export default {
         flex-direction: column;
         margin-top: 25%;
         margin-bottom: 0;
-        width: 100%;
+        max-width: 100%;
         p {
           font-size: 1rem;
           color: white;
@@ -139,7 +133,7 @@ export default {
 .main {
   background-color: #cacaca;
   height: 100%;
-  width: 55%;
+  max-width: 55%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;

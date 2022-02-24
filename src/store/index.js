@@ -11,20 +11,8 @@ export default new Vuex.Store({
     cart: [],
     products: {},
     overlay: false,
-    favoriteProducts: [
-      {
-        id: 1337,
-        title: "Fire",
-        specialEdition: false,
-        price: 599,
-        category: "hoodie",
-        shortDesc: "unisex",
-        longDesc: "Coffin rip grip vert snake casper slide Paul Rodriguez.",
-        imgFile: "sinus-hoodie-fire.png",
-        createdAt: "2022-02-21T13:04:44.289Z",
-        updatedAt: "2022-02-21T13:04:44.289Z",
-      },
-    ],
+    favoriteProducts: [],
+    showLogin: false,
   },
 
   mutations: {
@@ -38,7 +26,9 @@ export default new Vuex.Store({
       }
     },
     addFavoriteProduct(state, product) {
-      state.favoriteProducts.push(product);
+      if (!state.favoriteProducts.includes(product)) {
+        state.favoriteProducts.push(product);
+      }
     },
     toggleOverlay(state) {
       state.overlay = !state.overlay;
@@ -85,8 +75,10 @@ export default new Vuex.Store({
       const response = await API.getProducts();
       context.commit("saveProducts", response.data);
     },
-    addFavoriteProduct(context, product) {
-      context.commit("addFavoriteProduct", product);
+    addFavoriteProduct({
+      commit
+    }, product) {
+      commit("addFavoriteProduct", product);
     },
     toggleOverlay(context) {
       context.commit("toggleOverlay");
