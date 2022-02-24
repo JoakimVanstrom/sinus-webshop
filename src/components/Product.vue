@@ -5,7 +5,7 @@
     </div>
 
     <div class="CardHolder">
-      <img :src="path + product.imgFile" alt=""/>
+      <img :src="path + product.imgFile" alt="" />
     </div>
     <div class="CardBottom">
       <div class="left">
@@ -16,7 +16,8 @@
       </div>
       <div class="right">
         <button>
-          <img src="@/assets/icons/risk-skull-2.png" alt="" />Pirate It!
+          <img src="@/assets/icons/risk-skull-2.png" alt="" />
+          Pirate It!
         </button>
       </div>
     </div>
@@ -72,7 +73,7 @@ export default {
   transform: scale(0.95);
   transition: box-shadow 0.5s, transform 0.5s;
   cursor: url("~@/assets/icons/David.svg"), auto;
- /*  &:hover {
+  /*  &:hover {
     transform: scale(1);
     box-shadow: 5px 20px 30px rgba(0, 0, 0, 0.2);
   } */
