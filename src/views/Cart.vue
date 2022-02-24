@@ -17,6 +17,7 @@
       <button @click="incrementBtn(item)">+</button>
       <h1>{{ item.amount }}</h1>
       <h3>{{ item.price }} SEK</h3>
+      <button @click="removeFromCart()">d</button>
     </section>
 
     <div class="checkout">
@@ -47,6 +48,9 @@ export default {
         id: item.id,
         amount: item.amount + 1,
       });
+    },
+    removeFromCart(item) {
+      this.$store.dispatch("removeFromCart", item);
     },
   },
 

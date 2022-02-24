@@ -11,18 +11,20 @@ export default new Vuex.Store({
     cart: [],
     products: {},
     overlay: false,
-    favoriteProducts: [{
-      id: 1337,
-      title: "Fire",
-      specialEdition: false,
-      price: 599,
-      category: "hoodie",
-      shortDesc: "unisex",
-      longDesc: "Coffin rip grip vert snake casper slide Paul Rodriguez.",
-      imgFile: "sinus-hoodie-fire.png",
-      createdAt: "2022-02-21T13:04:44.289Z",
-      updatedAt: "2022-02-21T13:04:44.289Z",
-    }, ],
+    favoriteProducts: [
+      {
+        id: 1337,
+        title: "Fire",
+        specialEdition: false,
+        price: 599,
+        category: "hoodie",
+        shortDesc: "unisex",
+        longDesc: "Coffin rip grip vert snake casper slide Paul Rodriguez.",
+        imgFile: "sinus-hoodie-fire.png",
+        createdAt: "2022-02-21T13:04:44.289Z",
+        updatedAt: "2022-02-21T13:04:44.289Z",
+      },
+    ],
     showLogin: false,
   },
 
@@ -46,23 +48,17 @@ export default new Vuex.Store({
       state.showLogin = !state.showLogin;
     },
     addToCart(state, product) {
-      /* if (!state.cart.includes(product)) {
-        state.cart.push(product);
-      }  */
       const inCart = state.cart.find((cartItem) => cartItem.id === product.id);
       if (inCart) {
         inCart.amount++;
       } else {
         state.cart.push({
           id: product.id,
-          amount: 1
+          amount: 1,
         });
       }
     },
-    updateCartItem(state, {
-      id,
-      amount
-    }) {
+    updateCartItem(state, { id, amount }) {
       const inCart = state.cart.find((cartItem) => cartItem.id == id);
       inCart.amount = amount;
     },
@@ -71,6 +67,9 @@ export default new Vuex.Store({
     },
     decrementBtn(state, product) {
       state.cart[state.cart.indexOf(product)].amount--;
+    },
+    removeFromCart(state, product) {
+      state.cart.splice(state.cart.indexOf(product), 1);
     },
   },
 
@@ -93,20 +92,13 @@ export default new Vuex.Store({
     toggleLoginPage(context) {
       context.commit("toggleLoginPage");
     },
-    addToCart({
-      commit
-    }, product) {
+    addToCart({ commit }, product) {
       commit("addToCart", product);
     },
-    updateCartItem({
-      commit
-    }, {
-      id,
-      amount
-    }) {
+    updateCartItem({ commit }, { id, amount }) {
       commit("updateCartItem", {
         id,
-        amount
+        amount,
       });
     },
     decrementBtn(context, product) {
@@ -115,6 +107,9 @@ export default new Vuex.Store({
     incrementBtn(context, product) {
       context.commit("incrementBtn", product);
     },
+    removeFromCart({ commit }, product) {
+      commit("removeFromCart", product);
+    }
   },
 
   getters: {
@@ -132,7 +127,7 @@ export default new Vuex.Store({
       return state.cart.reduce((total, product) => {
         return total + product.amount * state.products[product.id].price;
       }, 0);
-    }
+    },
   },
   modules: {},
 });
