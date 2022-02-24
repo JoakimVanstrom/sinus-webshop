@@ -44,9 +44,13 @@ export default new Vuex.Store({
       state.showLogin = !state.showLogin;
     },
     addToCart(state, product) {
-      state.cart.push(product);
+      // prevents dublicates
+      if (!state.cart.includes(product)) {
+        state.cart.push(product);
+      } /* else {
+        state.cart[state.cart.indexOf(product)].amount++;
+      } */
     },
-
   },
 
   actions: {
