@@ -1,17 +1,19 @@
 <template>
   <div class="CardComponent">
     <div class="favorite-product">
-      <img src="@/assets/icons/favorite-heart.svg" />
+      <img src="@/assets/icons/favorite-heart.svg" @click="addToFavorite()" />
     </div>
 
     <div class="CardHolder">
-      <img :src="path + product.imgFile" alt=""/>
+      <img :src="path + product.imgFile" alt="" />
     </div>
     <div class="CardBottom">
       <div class="left">
         <div class="content">
-          <h2>{{ product.title }} {{ product.category }}</h2>
-          <p>{{ product.price }}kr</p>
+          <router-link :to="'/SingleProductView/' + product.id">
+            <h2>{{ product.title }} {{ product.category }}</h2>
+            <p>{{ product.price }}kr</p>
+          </router-link>
         </div>
       </div>
       <div class="right">
@@ -31,11 +33,12 @@ export default {
       path: "http://localhost:5000/images/",
     };
   },
-  /* computed: {
-    getImage() {
-      return require(`../../../sinus-backend/sinus-backend/public/images/${this.product.imgFile}`);
+  methods: {
+    addToFavorite() {
+      this.$store.dispatch("addFavoriteProduct", this.product);
+      console.log(this.product.title + "Added to favorite");
     },
-  }, */
+  },
 };
 </script>
 
@@ -72,7 +75,7 @@ export default {
   transform: scale(0.95);
   transition: box-shadow 0.5s, transform 0.5s;
   cursor: url("~@/assets/icons/David.svg"), auto;
- /*  &:hover {
+  /*  &:hover {
     transform: scale(1);
     box-shadow: 5px 20px 30px rgba(0, 0, 0, 0.2);
   } */
