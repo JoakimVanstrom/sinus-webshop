@@ -4,26 +4,27 @@
       <img src="@/assets/icons/arrow-return-left.svg" height="50px" />
     </div>
 
-    <h1 class="h1">Mina Piravidsar</h1>
+    <div class="info">
+      <h1>Mina Piravidsar</h1>
+      <h2>Quantity</h2>
+      <h2>Price</h2>
+    </div>
 
-    <section class="products">
-      <p v-for="item in cart" :key="item.id">
-        <img :src="path + item.imgFile" alt="" />
-
-        {{ item.title }}
-      </p>
+    <section v-for="item in cartGetter" :key="item.id" class="products">
+      <img :src="path + item.imgFile" alt="" width="10%" />
+      <h3>Piravid {{ item.title }} {{ item.category }}</h3>
+      <button @click="decrementBtn(item)">-</button>
+      <button @click="incrementBtn(item)">+</button>
+      <h1>{{ item.amount }}</h1>
+      <h3>{{ item.price }} SEK</h3>
+      <button @click="removeFromCart()">d</button>
     </section>
 
     <div class="checkout">
-      <div class="top">
-        <h1>Order Details</h1>
-        <h2>subtotal</h2>
-      </div>
-      <div class="bottom">
-        <h2>Total cost</h2>
-        <p>1337 SEK</p>
-        <button><router-link to="/Checkout">Checkout</router-link></button>
-      </div>
+      <h1>Order Details</h1>
+      <h2>Total cost</h2>
+      <p>{{ cartTotal }} kr</p>
+      <button><router-link to="/Checkout">Checkout</router-link></button>
     </div>
   </main>
 </template>
@@ -35,16 +36,39 @@ export default {
       path: "http://localhost:5000/images/",
     };
   },
+  methods: {
+    decrementBtn(item) {
+      this.$store.dispatch("updateCartItem", {
+        id: item.id,
+        amount: item.amount - 1,
+      });
+    },
+    incrementBtn(item) {
+      this.$store.dispatch("updateCartItem", {
+        id: item.id,
+        amount: item.amount + 1,
+      });
+    },
+    removeFromCart(item) {
+      this.$store.dispatch("removeFromCart", item);
+    },
+  },
 
   computed: {
     cart() {
       return this.$store.state.cart;
     },
+    cartGetter() {
+      return this.$store.getters.cart;
+    },
+    cartTotal() {
+      return this.$store.getters.totalPrice;
+    },
   },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 * {
   margin: 0;
 }
@@ -52,24 +76,22 @@ export default {
   display: grid;
   place-items: left;
 }
-.h1 {
-  margin-right: 16rem;
+.info {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  border-bottom: 1px solid #000;
 }
 
 .checkout {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  display: grid;
-  height: 950px;
-  width: 506px;
-  background-color: rgba(128, 128, 128, 0.493);
-  place-items: center;
-  margin-left: 85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 35rem;
 }
-.top {
-  margin-bottom: 500px;
-}
+
 button {
   background: rgba(161, 0, 0, 0.7);
   border: none;
@@ -84,5 +106,35 @@ button {
 a {
   text-decoration: none;
   color: #fff;
+}
+
+.products {
+  border-bottom: rgb(224, 216, 216) 1px solid;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 60%;
+  padding: 5px;
+  img {
+    width: 30%;
+    height: 100px;
+    object-fit: contain;
+    background: rgb(214, 209, 209);
+  }
+  button {
+    background-color: #e83f57;
+    color: white;
+    border: none;
+    margin: 5px;
+    padding: 5px;
+    width: 20px;
+    border-radius: 1px;
+    cursor: pointer;
+  }
+  h3 {
+    margin-left: 25px;
+    font-size: 1.1rem;
+  }
 }
 </style>

@@ -15,7 +15,7 @@
           </p>
           <div class="ProductPrice">
             <button @click="addToCart()" class="BuyButton">Röva den!</button>
-            <h2>1337 kr</h2>
+            <h2>{{ product.price }} kr</h2> 
           </div>
         </div>
       </div>
@@ -32,18 +32,16 @@
 
 <script>
 export default {
-  methods: {
-    addToCart() {
-      this.$store.dispatch("addToCart", this.product);
-    },
-  },
    data() {
     return {
       path: "http://localhost:5000/images/",
     };
   },
-
-
+  methods: {
+    addToCart() {
+      this.$store.dispatch("addToCart", this.product);
+    },
+  },
   computed: {
     product() {
       return this.$store.state.productsList.find(

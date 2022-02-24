@@ -9,6 +9,7 @@ export default new Vuex.Store({
     email: null,
     productsList: [],
     cart: [],
+    products: {},
     overlay: false,
     favoriteProducts: [
       {
@@ -31,7 +32,10 @@ export default new Vuex.Store({
       state.email = authData.email;
     },
     saveProducts(state, products) {
-      state.productsList = products;
+      for (let product of products) {
+        state.productsList.push(product);
+        Vue.set(state.products, product.id, product);
+      }
     },
     addFavoriteProduct(state, product) {
       state.favoriteProducts.push(product);
@@ -43,7 +47,28 @@ export default new Vuex.Store({
       state.showLogin = !state.showLogin;
     },
     addToCart(state, product) {
-      state.cart.push(product);
+      const inCart = state.cart.find((cartItem) => cartItem.id === product.id);
+      if (inCart) {
+        inCart.amount++;
+      } else {
+        state.cart.push({
+          id: product.id,
+          amount: 1,
+        });
+      }
+    },
+    updateCartItem(state, { id, amount }) {
+      const inCart = state.cart.find((cartItem) => cartItem.id == id);
+      inCart.amount = amount;
+    },
+    incrementBtn(state, product) {
+      state.cart[state.cart.indexOf(product)].amount++;
+    },
+    decrementBtn(state, product) {
+      state.cart[state.cart.indexOf(product)].amount--;
+    },
+    removeFromCart(state, product) {
+      state.cart.splice(state.cart.indexOf(product), 1);
     },
   },
 
@@ -69,10 +94,42 @@ export default new Vuex.Store({
     toggleLoginPage(context) {
       context.commit("toggleLoginPage");
     },
-    addToCart(context, product) {
-      context.commit("addToCart", product);
+    addToCart({ commit }, product) {
+      commit("addToCart", product);
     },
+    updateCartItem({ commit }, { id, amount }) {
+      commit("updateCartItem", {
+        id,
+        amount,
+      });
+    },
+    decrementBtn(context, product) {
+      context.commit("decrementBtn", product);
+    },
+    incrementBtn(context, product) {
+      context.commit("incrementBtn", product);
+    },
+    removeFromCart({ commit }, product) {
+      commit("removeFromCart", product);
+    }
   },
 
+  getters: {
+    cart(state) {
+      return state.cart.map((product) => ({
+        id: product.id,
+        category: state.products[product.id].category,
+        title: state.products[product.id].title,
+        imgFile: state.products[product.id].imgFile,
+        price: state.products[product.id].price,
+        amount: product.amount,
+      }));
+    },
+    totalPrice(state) {
+      return state.cart.reduce((total, product) => {
+        return total + product.amount * state.products[product.id].price;
+      }, 0);
+    },
+  },
   modules: {},
 });
