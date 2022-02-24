@@ -13,18 +13,23 @@
           <div class="headbot">
             <p>Var vill du börja?</p>
             <div class="buttons">
-              <router-link :to="'/Library'"
-                ><button>Produkter</button></router-link
-              >
-              <button>Man</button>
-              <button>Barn</button>
+              <router-link :to="'/'"><button>Home</button></router-link>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="main">
-      <h1>Havets Bästa Deals!</h1>
+      <h1>Alla produkter!</h1>
+      <form class="search-container">
+        <input type="text" id="search-bar" placeholder="Sök på produkt" />
+        <a href="#"
+          ><img
+            class="search-icon"
+            src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"
+        /></a>
+      </form>
+
       <div class="productLibrary">
         <router-link
           v-for="item in products"
@@ -52,6 +57,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+a {
+  text-decoration: none;
+  color: black;
+}
 .home {
   width: 100%;
   font-family: Open, sans-serif;
@@ -144,7 +153,9 @@ export default {
   margin-right: auto;
   margin-top: 0;
   padding: 0;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   h1 {
     text-align: center;
     padding-top: 5%;
@@ -153,6 +164,47 @@ export default {
     font-size: 3rem;
     font-weight: 300;
     color: black;
+  }
+  .search-container {
+    width: 490px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  input#search-bar {
+    margin: 0 auto;
+    width: 100%;
+    height: 45px;
+    padding: 0 20px;
+    font-size: 1rem;
+    border: 1px solid #d0cfce;
+    outline: none;
+    &:focus {
+      border: 1px solid rgb(255, 97, 97);
+      transition: 0.35s ease;
+      color: rgb(255, 97, 97);
+      &::-webkit-input-placeholder {
+        transition: opacity 0.45s ease;
+        opacity: 0;
+      }
+      &::-moz-placeholder {
+        transition: opacity 0.45s ease;
+        opacity: 0;
+      }
+      &:-ms-placeholder {
+        transition: opacity 0.45s ease;
+        opacity: 0;
+      }
+    }
+  }
+
+  .search-icon {
+    position: relative;
+    float: right;
+    width: 75px;
+    height: 75px;
+    top: -62px;
+    right: -45px;
   }
 
   .productLibrary {
