@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="right">
-        <button>
+        <button @click="addToCart()">
           <img src="@/assets/icons/risk-skull-2.png" alt="" />
           Pirate It!
         </button>
@@ -38,6 +38,9 @@ export default {
     addToFavorite() {
       this.$store.dispatch("addFavoriteProduct", this.product);
       console.log(this.product.title + "Added to favorite");
+    },
+    addToCart() {
+      this.$store.dispatch("addToCart", this.product);
     },
   },
 };
@@ -129,6 +132,10 @@ export default {
       }
     }
   }
+}
+a {
+  text-decoration: none;
+  color: black;
 }
 
 @media only screen and (min-width: 600px) {
