@@ -66,18 +66,16 @@ export default new Vuex.Store({
     async authenticate(context, credentials) {
       const response = await API.login(credentials.email, credentials.password);
       API.saveToken(response.data.token);
-      const myData = await API.getMyInfo()
-      console.log(myData) 
-      console.log(response.data)
+      const myData = await API.getMyInfo();
+      console.log(myData);
+      console.log(response.data);
       context.commit("saveAuthData", myData.data);
     },
     async fetchProducts(context) {
       const response = await API.getProducts();
       context.commit("saveProducts", response.data);
     },
-    addFavoriteProduct({
-      commit
-    }, product) {
+    addFavoriteProduct({ commit }, product) {
       commit("addFavoriteProduct", product);
     },
     toggleOverlay(context) {
@@ -103,7 +101,7 @@ export default new Vuex.Store({
     },
     removeFromCart({ commit }, product) {
       commit("removeFromCart", product);
-    }
+    },
   },
 
   getters: {
@@ -122,6 +120,8 @@ export default new Vuex.Store({
         return total + product.amount * state.products[product.id].price;
       }, 0);
     },
+    getProductsByCategory: (state) => (category) =>
+      state.productsList.filter((product) => product.category == category),
   },
   modules: {},
 });
