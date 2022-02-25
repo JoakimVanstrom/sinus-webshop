@@ -46,6 +46,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+a {
+  text-decoration: none;
+  color: black;
+}
 .home {
   max-width: 1920px;
   font-family: Open, sans-serif;
@@ -153,7 +157,6 @@ export default {
     display: flex;
     height: 100%;
     flex-wrap: wrap;
-    
   }
 }
 </style>
