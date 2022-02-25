@@ -19,7 +19,6 @@
         <img v-if="user === null" src="@/assets/icons/identity.svg" alt=""/>
         </router-link>
     </div>
-    <input type="text" />
   </header>
 </template>
 

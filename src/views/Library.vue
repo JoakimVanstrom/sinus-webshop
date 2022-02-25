@@ -3,7 +3,7 @@
     <div class="head">
       <div class="headContent">
         <div class="hero">
-          <img src="@/assets/images/hero.png" alt="" />
+          <img src="@/assets/images/Piravid.png" alt="" />
         </div>
         <div class="rightside">
           <div class="headtop">
@@ -22,7 +22,12 @@
     <div class="main">
       <h1>Alla produkter!</h1>
       <form class="search-container">
-        <input type="text" id="search-bar" placeholder="Sök på produkt" />
+        <input
+          type="text"
+          id="search-bar"
+          placeholder="Sök på produkt"
+          v-model="showCategory"
+        />
         <a href="#"
           ><img
             class="search-icon"
@@ -32,7 +37,7 @@
 
       <div class="productLibrary">
         <router-link
-          v-for="item in products"
+          v-for="item in filteredProducts"
           :key="item.id"
           :to="'/SingleProductView/' + item.id"
         >
@@ -51,16 +56,20 @@ export default {
     products() {
       return this.$store.state.productsList;
     },
+    filteredProducts() {
+      return this.$store.getters.getProductsByCategory(this.showCategory);
+    },
   },
   methods: {},
+  data() {
+    return {
+      showCategory: "",
+    };
+  },
 };
 </script>
 
 <style scoped lang="scss">
-a {
-  text-decoration: none;
-  color: black;
-}
 .home {
   width: 100%;
   font-family: Open, sans-serif;

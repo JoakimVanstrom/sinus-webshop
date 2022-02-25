@@ -26,6 +26,13 @@ export default new Vuex.Store({
         Vue.set(state.products, product.id, product);
       }
     },
+    saveProductsPage(state, products) {
+      for (let product of products) {
+        state.productsList.push(product);
+        Vue.set(state.products, product.id, product);
+      }
+    },
+
     addFavoriteProduct(state, product) {
       if (!state.favoriteProducts.includes(product)) {
         state.favoriteProducts.push(product);
@@ -67,24 +74,47 @@ export default new Vuex.Store({
     async authenticate(context, credentials) {
       const response = await API.login(credentials.email, credentials.password);
       API.saveToken(response.data.token);
-      const myData = await API.getMyInfo()
-      console.log(myData) 
-      console.log(response.data)
+      const myData = await API.getMyInfo();
+      console.log(myData);
+      console.log(response.data);
       context.commit("saveAuthData", myData.data);
     },
     async fetchProducts(context) {
       const response = await API.getProducts();
       context.commit("saveProducts", response.data);
     },
+
   //   async uploadImage(context, formData){
   //     const addItem = API.addItem()
   //     const formData = new FormData()
   //     formData.append("imgFIle", this.$refs.fileField.files[0])
   //     context.commit("")
   // },
-    addFavoriteProduct({
-      commit
-    }, product) {
+//     addFavoriteProduct({
+//       commit
+//     }, product) {
+    async fetchProductsPage(context) {
+      const response = await API.getProductsPage();
+      console.log(response.data);
+      context.commit("saveProductsPage", response.data);
+    },
+
+    async fetchProductsPage3(context) {
+      const response = await API.getProductsPage3();
+      console.log(response.data);
+      context.commit("saveProductsPage", response.data);
+    },
+    async fetchProductsPage4(context) {
+      const response = await API.getProductsPage4();
+      console.log(response.data);
+      context.commit("saveProductsPage", response.data);
+    },
+    async fetchProductsPage5(context) {
+      const response = await API.getProductsPage5();
+      console.log(response.data);
+      context.commit("saveProductsPage", response.data);
+    },
+    addFavoriteProduct({ commit }, product) {
       commit("addFavoriteProduct", product);
     },
     toggleOverlay(context) {
@@ -110,7 +140,7 @@ export default new Vuex.Store({
     },
     removeFromCart({ commit }, product) {
       commit("removeFromCart", product);
-    }
+    },
   },
 
   getters: {
@@ -129,6 +159,8 @@ export default new Vuex.Store({
         return total + product.amount * state.products[product.id].price;
       }, 0);
     },
+    getProductsByCategory: (state) => (category) =>
+      state.productsList.filter((product) => product.category == category),
   },
   modules: {},
 });

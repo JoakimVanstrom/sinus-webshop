@@ -3,34 +3,47 @@
     <div class="return-arrow">
       <img src="@/assets/icons/arrow-return-left.svg" height="50px" />
     </div>
+     <h1 v-if="!cart.length">No items in cart.</h1>
+     <br>
 
-    <div class="info">
+    <div v-if="cart.length" class="info">
+     
       <h1>Mina Piravidsar</h1>
       <h2>Quantity</h2>
       <h2>Price</h2>
+      
     </div>
-
-    <section v-for="item in cartGetter" :key="item.id" class="products">
-      <img :src="path + item.imgFile" alt="" width="10%" />
-      <h3>Piravid {{ item.title }} {{ item.category }}</h3>
+    
+    <section v-for="item in cartGetter" :key="item.id" 
+    class="products">
+      <img :src="path + item.imgFile" alt="" />
+      <h2>Piravid {{ item.title }} {{ item.category }}</h2>
+      <button class="remove-btn" @click="removeFromCart()">
+        <img src="@/assets/icons/delete.svg" />
+      </button>
       <button @click="decrementBtn(item)">-</button>
       <button @click="incrementBtn(item)">+</button>
       <h1>{{ item.amount }}</h1>
-      <h3>{{ item.price }} SEK</h3>
-      <button @click="removeFromCart()">d</button>
+      <p>{{ item.price }} SEK</p>
     </section>
 
-    <div class="checkout">
-      <h1>Order Details</h1>
-      <h2>Total cost</h2>
+    <div class="order-info">
+      <h1>Total cost</h1>
       <p>{{ cartTotal }} kr</p>
-      <button><router-link to="/Checkout">Checkout</router-link></button>
     </div>
+
+     <Pay v-if="cart.length" />
+
+    
+   
   </main>
 </template>
 
 <script>
+import Pay from '@/components/Pay.vue'
 export default {
+  components: {Pay},
+
   data() {
     return {
       path: "http://localhost:5000/images/",
@@ -80,7 +93,7 @@ export default {
   display: grid;
   place-items: center;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
+  grid-gap: 20px;
   border-bottom: 1px solid #000;
 }
 
@@ -88,18 +101,20 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  padding-left: 35rem;
+  align-items: flex-end;
+  font-size: 1.5rem;
+  padding-bottom: 10px;
+  /* padding-left: 35rem; */
 }
 
 button {
   background: rgba(161, 0, 0, 0.7);
   border: none;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  padding: 1.2rem 3rem;
+  /*  border-radius: 0.5rem; */
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
@@ -114,11 +129,13 @@ a {
   align-items: center;
   flex-direction: row;
   justify-content: flex-start;
-  width: 60%;
-  padding: 5px;
+  width: 70%;
+  padding: 10px;
+  width: 50%;
+  
   img {
-    width: 30%;
-    height: 100px;
+    width: 40%;
+     /* height: 100px; */
     object-fit: contain;
     background: rgb(214, 209, 209);
   }
@@ -133,8 +150,19 @@ a {
     cursor: pointer;
   }
   h3 {
-    margin-left: 25px;
-    font-size: 1.1rem;
+    margin-left: 2rem;
+    font-size: 2rem;
+  }
+  .remove-btn {
+    background-color: white;
+    width: 120px;
+    cursor: pointer;
+    img {
+      background: none;
+    }
   }
 }
 </style>
+
+
+

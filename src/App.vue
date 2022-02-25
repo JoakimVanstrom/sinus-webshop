@@ -12,7 +12,13 @@ import Footer from "@/components/Footer.vue";
 export default {
   components: { Header, Footer },
   mounted() {
-    return this.$store.dispatch("fetchProducts");
+    return (
+      this.$store.dispatch("fetchProducts"),
+      this.$store.dispatch("fetchProductsPage"),
+      this.$store.dispatch("fetchProductsPage3"),
+      this.$store.dispatch("fetchProductsPage4"),
+      this.$store.dispatch("fetchProductsPage5")
+    );
   },
 };
 </script>
