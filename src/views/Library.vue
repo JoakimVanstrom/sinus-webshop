@@ -3,7 +3,7 @@
     <div class="head">
       <div class="headContent">
         <div class="hero">
-          <img src="@/assets/images/hero.png" alt="" />
+          <img src="@/assets/images/Piravid.png" alt="" />
         </div>
         <div class="rightside">
           <div class="headtop">
