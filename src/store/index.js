@@ -25,6 +25,13 @@ export default new Vuex.Store({
         Vue.set(state.products, product.id, product);
       }
     },
+    saveProductsPage(state, products) {
+      for (let product of products) {
+        state.productsList.push(product);
+        Vue.set(state.products, product.id, product);
+      }
+    },
+
     addFavoriteProduct(state, product) {
       if (!state.favoriteProducts.includes(product)) {
         state.favoriteProducts.push(product);
@@ -74,6 +81,27 @@ export default new Vuex.Store({
     async fetchProducts(context) {
       const response = await API.getProducts();
       context.commit("saveProducts", response.data);
+    },
+    async fetchProductsPage(context) {
+      const response = await API.getProductsPage();
+      console.log(response.data);
+      context.commit("saveProductsPage", response.data);
+    },
+
+    async fetchProductsPage3(context) {
+      const response = await API.getProductsPage3();
+      console.log(response.data);
+      context.commit("saveProductsPage", response.data);
+    },
+    async fetchProductsPage4(context) {
+      const response = await API.getProductsPage4();
+      console.log(response.data);
+      context.commit("saveProductsPage", response.data);
+    },
+    async fetchProductsPage5(context) {
+      const response = await API.getProductsPage5();
+      console.log(response.data);
+      context.commit("saveProductsPage", response.data);
     },
     addFavoriteProduct({ commit }, product) {
       commit("addFavoriteProduct", product);
