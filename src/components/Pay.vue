@@ -42,7 +42,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 .submit-order-btn {
   width: 100%;
   height: 50px;

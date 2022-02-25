@@ -62,7 +62,7 @@
 export default {};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .footer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
