@@ -2,14 +2,10 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import SingleProductView from "../views/SingleProductView.vue";
-<<<<<<< HEAD
 import Cart from "../views/Cart.vue";
 import Checkout from "../views/Checkout.vue";
 import OrderConfirm from "../views/OrderConfirm.vue";
 import LoginView from "../views/LoginView.vue"
-=======
-import LoginView from "../views/LoginView.vue";
->>>>>>> developer
 import Library from "../views/Library.vue";
 import AdminView from "../views/AdminView.vue";
 
@@ -36,6 +32,11 @@ const routes = [
     path: "/Checkout",
     name: "Checkout",
     component: Checkout,
+  },
+  {
+    path: "/OrderConfirm",
+    name: "OrderConfirm",
+    component: OrderConfirm,
   },
   {
     path: "/login",
