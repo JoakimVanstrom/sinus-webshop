@@ -13,17 +13,25 @@
 
     <section v-for="item in cartGetter" :key="item.id" class="products">
       <img :src="path + item.imgFile" alt="" />
-      <h2>Piravid {{ item.title }} {{ item.category }}</h2>
-      <button class="remove-btn" @click="removeFromCart()">
-        <img src="@/assets/icons/delete.svg" />
-      </button>
-      <button @click="decrementBtn(item)">-</button>
-      <button @click="incrementBtn(item)">+</button>
-      <h1>{{ item.amount }}</h1>
-      <p>{{ item.price }} SEK</p>
+      <p>Piravid {{ item.title }} {{ item.category }}</p>
+
+      <section class="amount-btns">
+        <button class="remove-btn" @click="removeFromCart()">
+          <img src="@/assets/icons/delete.svg" />
+        </button>
+        <button @click="decrementBtn(item)">-</button>
+        <button @click="incrementBtn(item)">+</button>
+        <h1>{{ item.amount }}</h1>
+    
+      </section>
+
+      
+      <section class="price">
+        <p>{{ item.price }} SEK</p>
+      </section>
     </section>
 
-    <div class="order-info">
+    <div class="total-cost">
       <h1>Total cost</h1>
       <p>{{ cartTotal }} kr</p>
     </div>
@@ -77,6 +85,12 @@ export default {
 * {
   margin: 0;
 }
+
+.amount-btns {  
+  display: flex;
+  align-items: center;
+  margin: 5px;
+}
 .return-arrow {
   display: grid;
   place-items: left;
@@ -85,18 +99,7 @@ export default {
   display: grid;
   place-items: center;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
   border-bottom: 1px solid #000;
-}
-
-.checkout {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  font-size: 1.5rem;
-  padding-bottom: 10px;
-  /* padding-left: 35rem; */
 }
 
 button {
@@ -105,10 +108,7 @@ button {
   font-size: 1rem;
   font-weight: bold;
   color: #fff;
-  padding: 1.2rem 3rem;
-  /*  border-radius: 0.5rem; */
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
 }
 a {
   text-decoration: none;
@@ -123,27 +123,11 @@ a {
   justify-content: flex-start;
   width: 70%;
   padding: 10px;
-  width: 50%;
-
   img {
     width: 40%;
-    /* height: 100px; */
+    height: 100px;
     object-fit: contain;
-    background: rgb(214, 209, 209);
-  }
-  button {
-    background-color: #e83f57;
-    color: white;
-    border: none;
-    margin: 5px;
-    padding: 5px;
-    width: 20px;
-    border-radius: 1px;
-    cursor: pointer;
-  }
-  h3 {
-    margin-left: 2rem;
-    font-size: 2rem;
+  
   }
   .remove-btn {
     background-color: white;
@@ -151,8 +135,12 @@ a {
     cursor: pointer;
     img {
       background: none;
+      width: 25px;
     }
   }
+}
+.price {
+  padding-left: 5rem;
 }
 .checkout-btn {
   width: 100%;

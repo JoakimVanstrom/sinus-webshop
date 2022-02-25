@@ -135,8 +135,8 @@ export default new Vuex.Store({
     removeFromCart({ commit }, product) {
       commit("removeFromCart", product);
     },
-    confirmOrder({ commit }) {
-      commit("confirmOrder");
+    emptyCart({ commit }) {
+      commit("emptyCart");
     }
   },
 

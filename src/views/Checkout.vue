@@ -34,7 +34,7 @@
         </label>
       </div>
     </form>
-    <button @click="confirmOrder() + $router.push('/OrderConfirm')" class="confirm-order-btn">Confirm order</button>
+    <button @click="emptyCart() + $router.push('/OrderConfirm')" class="confirm-order-btn">Confirm order</button>
   </main>
 </template>
 
@@ -54,8 +54,8 @@ export default {
     }
   },
   methods: {
-    confirmOrder() {
-      this.$store.dispatch("confirmOrder");
+    emptyCart() {
+      this.$store.dispatch("emptyCart");
     },
   }
 };
