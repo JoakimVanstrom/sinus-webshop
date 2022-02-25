@@ -71,7 +71,7 @@ export default new Vuex.Store({
     removeFromCart(state, product) {
       state.cart.splice(state.cart.indexOf(product), 1);
     },
-    confirmOrder(state) {
+    emptyCart(state) {
       state.cart = [];
     }
   },
