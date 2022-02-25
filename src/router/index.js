@@ -4,9 +4,9 @@ import Home from "../views/Home.vue";
 import Cart from "../views/Cart.vue";
 import SingleProductView from "../views/SingleProductView.vue";
 import Checkout from "../views/Checkout.vue";
-import LoginView from "../views/LoginView.vue"
+import LoginView from "../views/LoginView.vue";
 import Library from "../views/Library.vue";
-
+import AdminView from "../views/AdminView.vue";
 
 Vue.use(VueRouter);
 
@@ -32,15 +32,19 @@ const routes = [
     component: Checkout,
   },
   {
-
     path: "/login",
     name: "Login",
-    component: LoginView},
-
-    {path: "/Library",
-    name: "Library",
-    component: Library,
-
+    component: LoginView,
+  },
+  { 
+    path: "/Library", 
+    name: "Library", 
+    component: Library 
+  },
+  { 
+    path: "/AdminView", 
+    name: "AdminArea", 
+    component: AdminView 
   },
 ];
 

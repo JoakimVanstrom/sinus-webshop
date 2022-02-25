@@ -12,12 +12,13 @@ export default new Vuex.Store({
     products: {},
     overlay: false,
     favoriteProducts: [],
-    showLogin: false,
+    userRole: null,
   },
 
   mutations: {
     saveAuthData(state, authData) {
       state.email = authData.email;
+      state.userRole = authData.role;
     },
     saveProducts(state, products) {
       for (let product of products) {
@@ -75,6 +76,12 @@ export default new Vuex.Store({
       const response = await API.getProducts();
       context.commit("saveProducts", response.data);
     },
+  //   async uploadImage(context, formData){
+  //     const addItem = API.addItem()
+  //     const formData = new FormData()
+  //     formData.append("imgFIle", this.$refs.fileField.files[0])
+  //     context.commit("")
+  // },
     addFavoriteProduct({
       commit
     }, product) {

@@ -16,4 +16,7 @@ export async function getMyInfo(){
 export async function getProducts(){
     return await axios.get('/items')
 }
+export async function upload(formData){
+    return await axios.post('/images', formData)
+}
 

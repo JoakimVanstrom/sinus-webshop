@@ -13,8 +13,11 @@
         alt=""
       />
       <router-link to="/login"
-        ><img src="@/assets/icons/identity.svg" alt=""
-      /></router-link>
+        >
+        <img v-if="user === 'admin'" src="@/assets/icons/David.svg" alt=""/>
+        <img v-if="user === 'customer'" src="@/assets/icons/identity.svg" alt=""/>
+        <img v-if="user === null" src="@/assets/icons/identity.svg" alt=""/>
+        </router-link>
     </div>
     <input type="text" />
   </header>
@@ -42,8 +45,8 @@ export default {
     overlay() {
       return this.$store.state.overlay;
     },
-    showLoginPage() {
-      return this.$store.state.showLogin;
+    user() {
+      return this.$store.state.userRole;
     },
   },
 };
@@ -74,7 +77,7 @@ header {
     justify-self: end;
     align-self: center;
     img {
-      width: 2rem;
+      width: 3rem;
       padding: 0.5rem;
     }
   }
