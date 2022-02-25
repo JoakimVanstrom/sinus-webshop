@@ -62,7 +62,8 @@ export default {
 </script>
 
 <style scoped>
-.confirm-order-btn {
+/* .confirm-order-btn {
+.submit-order-btn {
   width: 100%;
   height: 50px;
   border: none;
@@ -71,7 +72,7 @@ export default {
   font-weight: bold;
   color: rgb(255, 255, 255);
   margin-top: 20px;
-}
+} */
 form {
   display: flex;
   justify-content: flex-start;
