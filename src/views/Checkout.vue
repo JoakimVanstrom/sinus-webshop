@@ -5,17 +5,17 @@
         <h1>ADDRESS</h1>
 
         <label for="name" class="name">
-          <input type="text" placeholder="your name" />
+          <input type="text" placeholder="your name" v-model="order.name" />
         </label>
 
         <label for="street" class="street">
-          <input type="text" placeholder="street" />
+          <input type="text" placeholder="street" v-model="order.street" />
         </label>
         <label for="Zip" class="zip">
-          <input type="text" placeholder="zip code" />
+          <input type="text" placeholder="zip code" v-model="order.zip" />
         </label>
         <label for="City" class="city">
-          <input type="text" placeholder="city" />
+          <input type="text" placeholder="city" v-model="order.city" />
         </label>
       </div>
 
@@ -23,27 +23,46 @@
         <h1>PAYMENT</h1>
 
         <label for="cardnumber" class="card-number">
-          <input type="numbers" placeholder="Card Number" />
+          <input type="numbers" placeholder="Card Number" v-model="order.cardnumber" />
         </label>
 
         <label for="cardvalid" class="card-valid">
-          <input type="text" placeholder="valid until" />
+          <input type="text" placeholder="valid until" v-model="order.cardvalid"/>
         </label>
         <label for="cardcc" class="card-ccv">
-          <input type="numbers" placeholder="ccv" />
+          <input type="numbers" placeholder="ccv" v-model="order.ccv"/>
         </label>
       </div>
     </form>
-    <button class="submit-order-btn"> Submit order</button>
+    <button @click="confirmOrder() + $router.push('/OrderConfirm')" class="confirm-order-btn">Confirm order</button>
   </main>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      order: {
+        name: '',
+        street: '',
+        zip: '',
+        city: '',
+        cardnumber: '',
+        cardvalid: '',
+        ccv: ''
+      }
+    }
+  },
+  methods: {
+    confirmOrder() {
+      this.$store.dispatch("confirmOrder");
+    },
+  }
+};
 </script>
 
-<style>
-.submit-order-btn {
+<style scoped>
+.confirm-order-btn {
   width: 100%;
   height: 50px;
   border: none;

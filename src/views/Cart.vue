@@ -3,19 +3,15 @@
     <div class="return-arrow">
       <img src="@/assets/icons/arrow-return-left.svg" height="50px" />
     </div>
-     <h1 v-if="!cart.length">No items in cart.</h1>
-     <br>
+    <h1 v-if="!cart.length">No items in cart.</h1>
 
     <div v-if="cart.length" class="info">
-     
       <h1>Mina Piravidsar</h1>
       <h2>Quantity</h2>
       <h2>Price</h2>
-      
     </div>
-    
-    <section v-for="item in cartGetter" :key="item.id" 
-    class="products">
+
+    <section v-for="item in cartGetter" :key="item.id" class="products">
       <img :src="path + item.imgFile" alt="" />
       <h2>Piravid {{ item.title }} {{ item.category }}</h2>
       <button class="remove-btn" @click="removeFromCart()">
@@ -32,18 +28,14 @@
       <p>{{ cartTotal }} kr</p>
     </div>
 
-     <Pay v-if="cart.length" />
-
-    
-   
+    <button class="checkout-btn">
+      <router-link to="/Checkout">Checkout</router-link>
+    </button>
   </main>
 </template>
 
 <script>
-import Pay from '@/components/Pay.vue'
 export default {
-  components: {Pay},
-
   data() {
     return {
       path: "http://localhost:5000/images/",
@@ -132,10 +124,10 @@ a {
   width: 70%;
   padding: 10px;
   width: 50%;
-  
+
   img {
     width: 40%;
-     /* height: 100px; */
+    /* height: 100px; */
     object-fit: contain;
     background: rgb(214, 209, 209);
   }
@@ -162,7 +154,14 @@ a {
     }
   }
 }
+.checkout-btn {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  margin-top: 20px;
+}
 </style>
-
-
-
