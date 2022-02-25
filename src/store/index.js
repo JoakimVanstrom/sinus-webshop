@@ -7,11 +7,14 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     email: null,
+    showLogin: false,
     productsList: [],
     cart: [],
     products: {},
     overlay: false,
     favoriteProducts: [],
+    orderHistory: [],
+    
     userRole: null,
   },
 
@@ -68,6 +71,9 @@ export default new Vuex.Store({
     removeFromCart(state, product) {
       state.cart.splice(state.cart.indexOf(product), 1);
     },
+    confirmOrder(state) {
+      state.cart = [];
+    }
   },
 
   actions: {
@@ -141,6 +147,9 @@ export default new Vuex.Store({
     removeFromCart({ commit }, product) {
       commit("removeFromCart", product);
     },
+    emptyCart({ commit }) {
+      commit("emptyCart");
+    }
   },
 
   getters: {
