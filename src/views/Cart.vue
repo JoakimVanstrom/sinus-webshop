@@ -22,7 +22,6 @@
         <button @click="decrementBtn(item)">-</button>
         <button @click="incrementBtn(item)">+</button>
         <h1>{{ item.amount }}</h1>
-    
       </section>
 
       
@@ -30,6 +29,10 @@
         <p>{{ item.price }} SEK</p>
       </section>
     </section>
+
+    <div class="history">
+      <button @click="addToOrderHistory()">Add to history</button>
+    </div>
 
     <div v-if="cart.length" class="total-cost">
       <h1>Total cost</h1>
@@ -64,6 +67,9 @@ export default {
     },
     removeFromCart(item) {
       this.$store.dispatch("removeFromCart", item);
+    },
+    addToOrderHistory() {
+      this.$store.dispatch("addToOrderHistory", this.cart);
     },
   },
 

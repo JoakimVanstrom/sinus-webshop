@@ -31,7 +31,6 @@
       </div>
           <button @click="emptyCart() + $router.push('/OrderConfirm')" class="confirm-order-btn">Confirm order</button>
     </form>
-
   </main>
 </template>
 
