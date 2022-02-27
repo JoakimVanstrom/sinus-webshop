@@ -31,14 +31,14 @@
       </section>
     </section>
 
-    <div class="total-cost">
+    <div v-if="cart.length" class="total-cost">
       <h1>Total cost</h1>
       <p>{{ cartTotal }} kr</p>
-    </div>
-
-    <button class="checkout-btn">
+        <button class="checkout-btn">
       <router-link to="/Checkout">Checkout</router-link>
     </button>
+    </div>
+  
   </main>
 </template>
 
