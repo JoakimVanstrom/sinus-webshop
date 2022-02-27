@@ -19,6 +19,9 @@
         <img v-if="user === null" src="@/assets/icons/identity.svg" alt=""/>
         </router-link>
     </div>
+    <p class="my-account">
+       <router-link to="/MyProfile">MyProfile</router-link>
+       </p>
   </header>
 </template>
 
@@ -110,5 +113,19 @@ header {
   h1 {
     margin: 0;
   }
+}
+.my-account{
+  grid-row: 1/1;
+  grid-column: 11/12;
+  align-self: center;
+  margin-left: 50%;
+  font-family: "Pirata One", cursive;
+  color: white;
+  font-size: 20px;
+  margin: 0;
+  text-decoration: none;
+ a{
+   color: #fff;
+ }
 }
 </style>
