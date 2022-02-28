@@ -8,6 +8,7 @@ import OrderConfirm from "../views/OrderConfirm.vue";
 import LoginView from "../views/LoginView.vue"
 import Library from "../views/Library.vue";
 import AdminView from "../views/AdminView.vue";
+import MyProfile from "../views/MyProfile.vue";
 
 
 Vue.use(VueRouter);
@@ -42,6 +43,11 @@ const routes = [
     path: "/login",
     name: "Login",
     component: LoginView,
+  },
+  {
+    path: "/MyProfile",
+    name: "MyProfile",
+    component: MyProfile,
   },
   { 
     path: "/Library", 
