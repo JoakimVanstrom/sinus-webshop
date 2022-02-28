@@ -3,11 +3,9 @@
     <form action="">
       <div class="address-group">
         <h1>ADDRESS</h1>
-
         <label for="name" class="name">
           <input type="text" placeholder="your name" v-model="order.name" />
         </label>
-
         <label for="street" class="street">
           <input type="text" placeholder="street" v-model="order.street" />
         </label>
@@ -21,11 +19,9 @@
 
       <div class="payment-group">
         <h1>PAYMENT</h1>
-
         <label for="cardnumber" class="card-number">
           <input type="numbers" placeholder="Card Number" v-model="order.cardnumber" />
         </label>
-
         <label for="cardvalid" class="card-valid">
           <input type="text" placeholder="valid until" v-model="order.cardvalid"/>
         </label>
@@ -33,8 +29,8 @@
           <input type="numbers" placeholder="ccv" v-model="order.ccv"/>
         </label>
       </div>
+          <button @click="emptyCart() + $router.push('/OrderConfirm')" class="confirm-order-btn">Confirm order</button>
     </form>
-    <button @click="emptyCart() + $router.push('/OrderConfirm')" class="confirm-order-btn">Confirm order</button>
   </main>
 </template>
 
@@ -62,31 +58,21 @@ export default {
 </script>
 
 <style scoped>
-/* .confirm-order-btn {
-.submit-order-btn {
+.confirm-order-btn {
   width: 100%;
-  height: 50px;
+  height: 40px;
   border: none;
   border-radius: 5px;
   font-size: 20px;
   font-weight: bold;
   color: rgb(255, 255, 255);
-  margin-top: 20px;
-} */
+}
 form {
   display: flex;
   justify-content: flex-start;
-}
-.submit-order {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-shadow: #c9c6c6 0px 0px 10px;
-  margin: 30px;
-  padding: 30px;
+  gap: 10px;
 }
-
 .sign-in {
   display: grid;
   place-items: left;
