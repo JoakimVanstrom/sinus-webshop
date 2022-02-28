@@ -29,6 +29,11 @@ export default {};
   box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
 }
 h1 {
-  color: #fff;
+  background: rgba(0, 0, 0, 0.705);
+  color: rgb(255, 255, 255);
+}
+a {
+  color: rgb(255, 255, 255);
+  background: rgba(0, 0, 0, 0.705);
 }
 </style>

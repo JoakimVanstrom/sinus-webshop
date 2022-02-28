@@ -73,7 +73,10 @@ export default new Vuex.Store({
     },
     emptyCart(state) {
       state.cart = [];
-    }
+    },
+    addToOrderHistory(state, cart) {
+      state.orderHistory.push(cart);
+      }
   },
 
   actions: {
@@ -149,6 +152,9 @@ export default new Vuex.Store({
     },
     emptyCart({ commit }) {
       commit("emptyCart");
+    },
+    addToOrderHistory({ commit }, cart) {
+      commit("addToOrderHistory", cart);
     }
   },
 

@@ -3,7 +3,7 @@
     <div class="head">
       <div class="headContent">
         <div class="hero">
-          <img src="@/assets/images/Piravid.png" alt="" />
+          <img src="@/assets/images/Piravid.png" alt="Piravid" />
         </div>
         <div class="rightside">
           <div class="headtop">
@@ -101,7 +101,6 @@ export default {
   margin-right: 5rem;
   padding: 1rem 1rem;
   font-size: 1rem;
-  border-radius: 2rem;
 }
 
 .head {
@@ -124,7 +123,7 @@ export default {
       img {
         width: 100%;
         height: 100%;
-        object-fit: fit;
+        object-fit: fill;
       }
     }
     .rightside {
@@ -186,7 +185,6 @@ export default {
 
 .main-top {
   display: flex;
-
   align-items: center;
 }
 .main {
