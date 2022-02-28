@@ -20,7 +20,9 @@
       </div>
     </div>
     <div class="main">
-      <h1>Alla produkter!</h1>
+      <div class="main-top">
+        <h1>Alla produkter!</h1>
+      </div>
       <form class="search-container">
         <input
           type="text"
@@ -34,6 +36,17 @@
             src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"
         /></a>
       </form>
+
+      <select class="category" v-model="showCategory">
+        <option
+          v-for="category in categories"
+          :key="category"
+          :value="category"
+          selected
+        >
+          {{ category }}
+        </option>
+      </select>
 
       <div class="productLibrary">
         <router-link
@@ -64,6 +77,15 @@ export default {
   data() {
     return {
       showCategory: "",
+      categories: [
+        "hoodie",
+        "cap",
+        "wheel",
+        "tshirt",
+        "totebag",
+        "socks",
+        "skateboard",
+      ],
     };
   },
 };
@@ -74,6 +96,14 @@ export default {
   width: 100%;
   font-family: Open, sans-serif;
 }
+.category {
+  align-self: flex-end;
+  margin-right: 5rem;
+  padding: 1rem 1rem;
+  font-size: 1rem;
+  border-radius: 2rem;
+}
+
 .head {
   display: flex;
   height: 400px;
@@ -154,6 +184,11 @@ export default {
   }
 }
 
+.main-top {
+  display: flex;
+
+  align-items: center;
+}
 .main {
   background-color: #cacaca;
   height: 100%;
