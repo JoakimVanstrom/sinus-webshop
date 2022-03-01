@@ -14,21 +14,24 @@ export default new Vuex.Store({
     overlay: false,
     favoriteProducts: [],
     orderHistory: [],
-    
     userRole: null,
+    address: {},
   },
 
   mutations: {
     saveAuthData(state, authData) {
       state.email = authData.email;
       state.userRole = authData.role;
+      state.address = authData.address;
     },
+    
     saveProducts(state, products) {
       for (let product of products) {
         state.productsList.push(product);
         Vue.set(state.products, product.id, product);
       }
     },
+
     saveProductsPage(state, products) {
       for (let product of products) {
         state.productsList.push(product);
@@ -41,12 +44,15 @@ export default new Vuex.Store({
         state.favoriteProducts.push(product);
       }
     },
+    
     toggleOverlay(state) {
       state.overlay = !state.overlay;
     },
+
     toggleLoginPage(state) {
       state.showLogin = !state.showLogin;
     },
+
     addToCart(state, product) {
       const inCart = state.cart.find((cartItem) => cartItem.id === product.id);
       if (inCart) {
@@ -58,25 +64,31 @@ export default new Vuex.Store({
         });
       }
     },
-    updateCartItem(state, { id, amount }) {
+
+    updateCartItem(state, {
+      id,
+      amount
+    }) {
       const inCart = state.cart.find((cartItem) => cartItem.id == id);
       inCart.amount = amount;
     },
+
     incrementBtn(state, product) {
       state.cart[state.cart.indexOf(product)].amount++;
     },
+
     decrementBtn(state, product) {
       state.cart[state.cart.indexOf(product)].amount--;
     },
+
     removeFromCart(state, product) {
       state.cart.splice(state.cart.indexOf(product), 1);
     },
-    emptyCart(state) {
-      state.cart = [];
-    },
+
     addToOrderHistory(state, cart) {
       state.orderHistory.push(cart);
-      }
+    }
+
   },
 
   actions: {
@@ -88,74 +100,101 @@ export default new Vuex.Store({
       console.log(response.data);
       context.commit("saveAuthData", myData.data);
     },
+    sendOrder(_, payload) {
+      payload.items = payload.items.map(item => item.id)
+      console.log(payload);
+      API.createOrder(payload).then(response => {
+        console.log(response.data);
+      })
+    },
+
     async fetchProducts(context) {
       const response = await API.getProducts();
       context.commit("saveProducts", response.data);
     },
 
-  //   async uploadImage(context, formData){
-  //     const addItem = API.addItem()
-  //     const formData = new FormData()
-  //     formData.append("imgFIle", this.$refs.fileField.files[0])
-  //     context.commit("")
-  // },
-//     addFavoriteProduct({
-//       commit
-//     }, product) {
     async fetchProductsPage(context) {
       const response = await API.getProductsPage();
-      console.log(response.data);
+      // console.log(response.data);
       context.commit("saveProductsPage", response.data);
     },
 
     async fetchProductsPage3(context) {
       const response = await API.getProductsPage3();
-      console.log(response.data);
+      // console.log(response.data);
       context.commit("saveProductsPage", response.data);
     },
+
     async fetchProductsPage4(context) {
       const response = await API.getProductsPage4();
-      console.log(response.data);
+      // console.log(response.data);
       context.commit("saveProductsPage", response.data);
     },
+
     async fetchProductsPage5(context) {
       const response = await API.getProductsPage5();
-      console.log(response.data);
+      // console.log(response.data);
       context.commit("saveProductsPage", response.data);
     },
-    addFavoriteProduct({ commit }, product) {
+
+    addFavoriteProduct({
+      commit
+    }, product) {
       commit("addFavoriteProduct", product);
     },
+
     toggleOverlay(context) {
       context.commit("toggleOverlay");
     },
+
     toggleLoginPage(context) {
       context.commit("toggleLoginPage");
     },
-    addToCart({ commit }, product) {
+
+    addToCart({
+      commit
+    }, product) {
       commit("addToCart", product);
     },
-    updateCartItem({ commit }, { id, amount }) {
+
+    updateCartItem({
+      commit
+    }, {
+      id,
+      amount
+    }) {
       commit("updateCartItem", {
         id,
         amount,
       });
     },
+
     decrementBtn(context, product) {
       context.commit("decrementBtn", product);
     },
+
     incrementBtn(context, product) {
       context.commit("incrementBtn", product);
     },
-    removeFromCart({ commit }, product) {
+
+    removeFromCart({
+      commit
+    }, product) {
       commit("removeFromCart", product);
     },
-    emptyCart({ commit }) {
+
+    emptyCart({
+      commit
+    }) {
       commit("emptyCart");
     },
-    addToOrderHistory({ commit }, cart) {
+
+    addToOrderHistory({
+      commit
+    }, cart) {
       commit("addToOrderHistory", cart);
     }
+
   },
 
   getters: {

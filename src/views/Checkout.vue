@@ -1,35 +1,54 @@
 <template>
   <main>
-    <form action="">
+    <form action="" @submit.prevent="sendOrder">
       <div class="address-group">
         <h1>ADDRESS</h1>
-        <label for="name" class="name">
+        <!-- <label for="name" class="name">
           <input type="text" placeholder="your name" v-model="order.name" />
+        </label> -->
+        <label v-if="!address" for="street" class="street">
+          <input type="text" placeholder="street" v-model="order.shippingAdress.street" />
         </label>
-        <label for="street" class="street">
-          <input type="text" placeholder="street" v-model="order.street" />
+        <label v-if="address" for="street" class="street">
+          <input type="text" placeholder="street" v-model="address.street" />
         </label>
-        <label for="Zip" class="zip">
-          <input type="text" placeholder="zip code" v-model="order.zip" />
+        <label v-if="!address" for="Zip" class="zip">
+          <input type="text" placeholder="zip code" v-model="order.shippingAdress.zip" />
         </label>
-        <label for="City" class="city">
-          <input type="text" placeholder="city" v-model="order.city" />
+        <label v-if="address" for="Zip" class="zip">
+          <input type="text" placeholder="zip code" v-model="address.zip"/>
+        </label>
+        <label v-if="!address" for="City" class="city">
+          <input type="text" placeholder="city" v-model="order.shippingAdress.city" />
+        </label>
+        <label v-if="address" for="City" class="city">
+          <input type="text" placeholder="city" v-model="address.city" />
         </label>
       </div>
 
       <div class="payment-group">
         <h1>PAYMENT</h1>
         <label for="cardnumber" class="card-number">
-          <input type="numbers" placeholder="Card Number" v-model="order.cardnumber" />
+          <input
+            type="numbers"
+            placeholder="Card Number"
+            v-model="order.payment.cardnumber"
+          />
         </label>
         <label for="cardvalid" class="card-valid">
-          <input type="text" placeholder="valid until" v-model="order.cardvalid"/>
+          <input
+            type="text"
+            placeholder="valid until"
+            v-model="order.payment.cardvalid"
+          />
         </label>
         <label for="cardcc" class="card-ccv">
-          <input type="numbers" placeholder="ccv" v-model="order.ccv"/>
+          <input type="numbers" placeholder="ccv" v-model="order.payment.ccv" />
         </label>
       </div>
-          <button @click="emptyCart() + $router.push('/OrderConfirm')" class="confirm-order-btn">Confirm order</button>
+      <button @click="sendOrder()" class="confirm-order-btn">
+        Confirm order
+      </button>
     </form>
   </main>
 </template>
@@ -39,21 +58,34 @@ export default {
   data() {
     return {
       order: {
-        name: '',
-        street: '',
-        zip: '',
-        city: '',
-        cardnumber: '',
-        cardvalid: '',
-        ccv: ''
-      }
-    }
+        "shippingAdress": {  
+          "street": "",
+          "zip": "",
+          "city": "",
+        },
+        payment: {
+          cardnumber: "",
+          cardvalid: "",
+          ccv: "",
+        },
+        items: this.$store.state.cart,
+      },
+    };
   },
   methods: {
-    emptyCart() {
-      this.$store.dispatch("emptyCart");
+    sendOrder() {
+      this.order.items = this.$store.state.cart;
+      this.$store.dispatch("sendOrder", this.order);
     },
-  }
+  },
+  computed: {
+    cart() {
+      return this.$store.state.cart;
+    },
+    address() {
+      return this.$store.state.address;
+    },
+  },
 };
 </script>
 

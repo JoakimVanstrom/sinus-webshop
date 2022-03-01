@@ -34,3 +34,7 @@ export async function getProductsPage4() {
 export async function getProductsPage5() {
   return await axios.get(`/items?page=5`);
 }
+
+export async function createOrder(payload) {
+  return await axios.post("/orders", payload);
+}
