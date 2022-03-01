@@ -16,8 +16,6 @@
               <router-link :to="'/Library'"
                 ><button>Produkter</button></router-link
               >
-              <button>Man</button>
-              <button>Barn</button>
             </div>
           </div>
         </div>
