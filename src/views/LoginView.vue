@@ -9,7 +9,7 @@
       <input type="password" v-model="password" placeholder="Password"/>
       <button>Log in</button>
     </form>
-     <p v-if="userEmail">Logged in as: {{userEmail}}</p>
+    <h3>Or <router-link to="/createuser">Create an account</router-link></h3>
   </div>
   </div>
 </template>
