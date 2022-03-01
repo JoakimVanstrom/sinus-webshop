@@ -12,15 +12,15 @@
         src="@/assets/icons/favorite-heart.svg"
         alt=""
       />
-      <router-link to="/login"
+      <router-link :to="'/' + user"
         >
         <img v-if="user === 'admin'" src="@/assets/icons/David.svg" alt=""/>
         <img v-if="user === 'customer'" src="@/assets/icons/identity.svg" alt=""/>
-        <img v-if="user === null" src="@/assets/icons/identity.svg" alt=""/>
+        <img v-if="user === 'login'" src="@/assets/icons/identity.svg" alt=""/>
         </router-link>
     </div>
-    <p class="my-account">
-       <router-link to="/MyProfile">MyProfile</router-link>
+    <p class="my-account" v-if="user === 'admin' || user === 'customer'">
+      {{user}}
        </p>
   </header>
 </template>
@@ -64,6 +64,7 @@ header {
   grid-template-columns: repeat(13, 1fr);
   grid-template-rows: auto;
   z-index: 0;
+
   img {
     grid-row: 1/3;
     grid-column: 5/5;
@@ -74,9 +75,9 @@ header {
   }
 
   div {
-    grid-column: 9/11;
-    grid-row: 1;
-    justify-self: end;
+    grid-column: 10/12;
+    grid-row: 1/3;
+    justify-self: start;
     align-self: center;
     img {
       width: 3rem;
@@ -115,17 +116,16 @@ header {
   }
 }
 .my-account{
-  grid-row: 1/1;
-  grid-column: 11/12;
+  grid-row: 1/3;
+  grid-column: 12/13;
   align-self: center;
-  margin-left: 50%;
   font-family: "Pirata One", cursive;
   color: white;
-  font-size: 20px;
+  font-size: 30px;
   margin: 0;
-  text-decoration: none;
  a{
    color: #fff;
  }
 }
+
 </style>

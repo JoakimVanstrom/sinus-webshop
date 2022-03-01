@@ -19,6 +19,9 @@ export async function getProducts() {
 export async function upload(formData){
     return await axios.post('/images', formData)
 }
+export async function registerUser(email,password,name,city,street,zip){
+  return await axios.post('/register', {email,password,name,address:{city,street,zip}})
+}
 
 let page = 2;
 

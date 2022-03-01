@@ -14,8 +14,9 @@ export default new Vuex.Store({
     overlay: false,
     favoriteProducts: [],
     orderHistory: [],
-    userRole: null,
+    userRole: "login",
     address: {},
+    user: {}
   },
 
   mutations: {
@@ -87,6 +88,9 @@ export default new Vuex.Store({
 
     addToOrderHistory(state, cart) {
       state.orderHistory.push(cart);
+    },
+    saveUser(state, userData){
+      state.user = userData
     }
 
   },
@@ -106,6 +110,18 @@ export default new Vuex.Store({
       API.createOrder(payload).then(response => {
         console.log(response.data);
       })
+    },
+    async registerUser(context, credentials){
+      const response = await API.registerUser(
+        credentials.email, 
+        credentials.password,
+        credentials.name,
+        credentials.city,
+        credentials.street,
+        credentials.zip
+        )
+      console.log(response)
+      context.commit("saveUser", credentials)
     },
 
     async fetchProducts(context) {

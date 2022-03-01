@@ -9,6 +9,7 @@ import LoginView from "../views/LoginView.vue"
 import Library from "../views/Library.vue";
 import AdminView from "../views/AdminView.vue";
 import MyProfile from "../views/MyProfile.vue";
+import CreateUser from "../views/CreateUser.vue"
 
 
 Vue.use(VueRouter);
@@ -45,7 +46,7 @@ const routes = [
     component: LoginView,
   },
   {
-    path: "/MyProfile",
+    path: "/customer",
     name: "MyProfile",
     component: MyProfile,
   },
@@ -55,10 +56,14 @@ const routes = [
     component: Library 
   },
   { 
-    path: "/AdminView", 
+    path: "/admin", 
     name: "AdminArea", 
     component: AdminView 
   },
+ { path: "/createuser",
+  name: "CreateUser",
+  component: CreateUser
+}
 ];
 
 const router = new VueRouter({
