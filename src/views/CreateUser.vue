@@ -43,7 +43,7 @@ export default {
       });
     },
     changePath(){
-      return this.$router.go(-1)
+      return this.$router.push(`'/${this.user}'`)
     },
   },
   computed: {
