@@ -25,7 +25,7 @@ export default new Vuex.Store({
       state.userRole = authData.role;
       state.address = authData.address;
     },
-    
+
     saveProducts(state, products) {
       for (let product of products) {
         state.productsList.push(product);
@@ -45,13 +45,17 @@ export default new Vuex.Store({
         state.favoriteProducts.push(product);
       }
     },
-    
+
     toggleOverlay(state) {
       state.overlay = !state.overlay;
     },
 
     toggleLoginPage(state) {
       state.showLogin = !state.showLogin;
+    },
+
+    saveOrders(state, orders) {
+      state.orderHistory = orders;
     },
 
     addToCart(state, product) {
@@ -86,10 +90,7 @@ export default new Vuex.Store({
       state.cart.splice(state.cart.indexOf(product), 1);
     },
 
-    addToOrderHistory(state, cart) {
-      state.orderHistory.push(cart);
-    },
-    saveUser(state, userData){
+    saveUser(state, userData) {
       state.user = userData
     }
 
@@ -111,15 +112,15 @@ export default new Vuex.Store({
         console.log(response.data);
       })
     },
-    async registerUser(context, credentials){
+    async registerUser(context, credentials) {
       const response = await API.registerUser(
-        credentials.email, 
+        credentials.email,
         credentials.password,
         credentials.name,
         credentials.city,
         credentials.street,
         credentials.zip
-        )
+      )
       console.log(response)
       context.commit("saveUser", credentials)
     },
@@ -205,12 +206,14 @@ export default new Vuex.Store({
       commit("emptyCart");
     },
 
-    addToOrderHistory({
+    getOrders({
       commit
-    }, cart) {
-      commit("addToOrderHistory", cart);
+    }) {
+      API.getOrders().then(response => {
+          commit("saveOrders", response.data)
+        })
+        .catch(console.log)
     }
-
   },
 
   getters: {
@@ -224,6 +227,20 @@ export default new Vuex.Store({
         amount: product.amount,
       }));
     },
+    orderHistory(state) {
+      return state.orderHistory.map((product) => ({
+        id: product.id,
+        items: product.items.map((item) => ({
+          id: item.id,
+          category: state.products[item.id].category,
+          title: state.products[item.id].title,
+          price: state.products[item.id].price,
+          imgFile: state.products[item.id].imgFile,
+          amount: item.amount,
+        })),
+      }));
+    },
+
     totalPrice(state) {
       return state.cart.reduce((total, product) => {
         return total + product.amount * state.products[product.id].price;
