@@ -24,13 +24,17 @@ export default {
       userEmail(){
       return this.$store.state.email
     },
+    user() {
+      return this.$store.state.userRole;
+    },
   },
   methods: {
       login(){
       this.$store.dispatch('authenticate',
       {email: this.email, password: this.password}
       )
-    }
+       this.$router.push('/')
+    },
   }
 };
 </script>
