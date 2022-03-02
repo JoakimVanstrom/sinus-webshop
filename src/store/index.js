@@ -107,7 +107,6 @@ export default new Vuex.Store({
     },
     sendOrder(_, payload) {
       payload.items = payload.items.map(item => item.id)
-      console.log(payload);
       API.createOrder(payload).then(response => {
         console.log(response.data);
       })
