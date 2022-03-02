@@ -1,21 +1,15 @@
 <template>
   <main>
     <h1>My Account</h1>
-
-    <div class="orders" v-for="item in orderHistory" :key="item.id">
-      <p>{{ item.id }}</p>
-      <p>{{ item.amount }}</p>
-    </div>
+    <OrderHistory class="orders" />
+    
   </main>
 </template>
 
 <script>
+import OrderHistory from "@/components/OrderHistory.vue";
 export default {
-  computed: {
-    orderHistory() {
-      return this.$store.state.orderHistory;
-    },
-  },
+  components: { OrderHistory },
 };
 </script>
 

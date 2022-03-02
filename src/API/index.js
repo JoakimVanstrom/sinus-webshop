@@ -25,6 +25,8 @@ export async function registerUser(email,password,name,city,street,zip){
 
 let page = 2;
 
+
+//fetch product pages
 export async function getProductsPage() {
   return await axios.get(`/items?page=${page}`);
 }
@@ -38,6 +40,11 @@ export async function getProductsPage5() {
   return await axios.get(`/items?page=5`);
 }
 
+
+//Order functions
 export async function createOrder(payload) {
   return await axios.post("/orders", payload);
+}
+export async function getOrders() {
+  return await axios.get("/orders");
 }
