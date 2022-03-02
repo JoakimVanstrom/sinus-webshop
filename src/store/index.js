@@ -201,13 +201,6 @@ export default new Vuex.Store({
     }) {
       commit("emptyCart");
     },
-
-    addToOrderHistory({
-      commit
-    }, cart) {
-      commit("addToOrderHistory", cart);
-    }
-
   },
 
   getters: {
