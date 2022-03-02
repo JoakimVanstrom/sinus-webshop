@@ -86,9 +86,6 @@ export default new Vuex.Store({
       state.cart.splice(state.cart.indexOf(product), 1);
     },
 
-    addToOrderHistory(state, cart) {
-      state.orderHistory.push(cart);
-    },
     saveUser(state, userData){
       state.user = userData
     }

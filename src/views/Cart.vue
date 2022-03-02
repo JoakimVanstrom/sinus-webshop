@@ -30,10 +30,6 @@
       </section>
     </section>
 
-    <div class="history">
-      <button @click="addToOrderHistory()">Add to history</button>
-    </div>
-
     <div v-if="cart.length" class="total-cost">
       <h1>Total cost</h1>
       <p>{{ cartTotal }} kr</p>
@@ -67,9 +63,6 @@ export default {
     },
     removeFromCart(item) {
       this.$store.dispatch("removeFromCart", item);
-    },
-    addToOrderHistory() {
-      this.$store.dispatch("addToOrderHistory", this.cart);
     },
   },
 
