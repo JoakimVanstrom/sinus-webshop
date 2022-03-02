@@ -46,7 +46,7 @@
           <input type="numbers" placeholder="ccv" v-model="order.payment.ccv" />
         </label>
       </div>
-      <button @click="sendOrder()" class="confirm-order-btn">
+      <button class="confirm-order-btn">
         Confirm order
       </button>
     </form>
