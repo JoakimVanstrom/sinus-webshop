@@ -227,19 +227,6 @@ export default new Vuex.Store({
         amount: product.amount,
       }));
     },
-    orderHistory(state) {
-      return state.orderHistory.map((product) => ({
-        id: product.id,
-        items: product.items.map((item) => ({
-          id: item.id,
-          category: state.products[item.id].category,
-          title: state.products[item.id].title,
-          price: state.products[item.id].price,
-          imgFile: state.products[item.id].imgFile,
-          amount: item.amount,
-        })),
-      }));
-    },
 
     totalPrice(state) {
       return state.cart.reduce((total, product) => {
