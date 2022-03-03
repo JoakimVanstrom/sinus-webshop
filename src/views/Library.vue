@@ -3,7 +3,7 @@
     <div class="head">
       <div class="headContent">
         <div class="hero">
-          <img src="@/assets/images/hero.png" alt="" />
+          <img src="@/assets/images/Piravid.png" alt="Piravid" />
         </div>
         <div class="rightside">
           <div class="headtop">
@@ -13,18 +13,49 @@
           <div class="headbot">
             <p>Var vill du börja?</p>
             <div class="buttons">
-              <router-link :to="'/Library'"
-                ><button>Produkter</button></router-link
-              >
+              <router-link :to="'/'"><button>Home</button></router-link>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="main">
-      <h1>Havets Bästa Deals!</h1>
+      <div class="main-top">
+        <h1>Alla produkter!</h1>
+      </div>
+      <form class="search-container">
+        <input
+          type="text"
+          id="search-bar"
+          placeholder="Sök på produkt"
+          v-model="showCategory"
+        />
+        <a href="#"
+          ><img
+            class="search-icon"
+            src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"
+        /></a>
+      </form>
+
+      <select class="category" v-model="showCategory">
+        <option
+          v-for="category in categories"
+          :key="category"
+          :value="category"
+          selected
+        >
+          {{ category }}
+        </option>
+      </select>
+
       <div class="productLibrary">
-        <Product v-for="item in products" :key="item.id" :product="item" />
+        <router-link
+          v-for="item in filteredProducts"
+          :key="item.id"
+          :to="'/SingleProductView/' + item.id"
+        >
+          <Product :product="item" />
+        </router-link>
       </div>
     </div>
   </div>
@@ -38,24 +69,44 @@ export default {
     products() {
       return this.$store.state.productsList;
     },
+    filteredProducts() {
+      return this.$store.getters.getProductsByCategory(this.showCategory);
+    },
   },
   methods: {},
+  data() {
+    return {
+      showCategory: "",
+      categories: [
+        "hoodie",
+        "cap",
+        "wheel",
+        "tshirt",
+        "totebag",
+        "socks",
+        "skateboard",
+      ],
+    };
+  },
 };
 </script>
 
 <style scoped lang="scss">
-a {
-  text-decoration: none;
-  color: black;
-}
 .home {
-  max-width: 1920px;
+  width: 100%;
   font-family: Open, sans-serif;
 }
+.category {
+  align-self: flex-end;
+  margin-right: 5rem;
+  padding: 1rem 1rem;
+  font-size: 1rem;
+}
+
 .head {
   display: flex;
   height: 400px;
-  max-width: 1920px;
+  width: 100%;
   background-color: rgba(161, 0, 0, 0.7);
   margin-left: auto;
   margin-right: auto;
@@ -66,23 +117,23 @@ a {
     margin-left: auto;
     margin-right: auto;
     .hero {
-      max-width: 50%;
+      width: 50%;
       height: 350px;
       margin-top: auto;
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: fill;
       }
     }
     .rightside {
-      max-width: 50%;
+      width: 50%;
       .headtop {
         display: flex;
         flex-direction: column;
         padding: 2rem;
         margin-top: 3%;
-        max-width: 100%;
+        width: 100%;
         h1 {
           font-size: 2rem;
           color: white;
@@ -99,7 +150,7 @@ a {
         flex-direction: column;
         margin-top: 25%;
         margin-bottom: 0;
-        max-width: 100%;
+        width: 100%;
         p {
           font-size: 1rem;
           color: white;
@@ -132,15 +183,21 @@ a {
   }
 }
 
+.main-top {
+  display: flex;
+  align-items: center;
+}
 .main {
   background-color: #cacaca;
   height: 100%;
-  max-width: 55%;
+  width: 55%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
   padding: 0;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   h1 {
     text-align: center;
     padding-top: 5%;
@@ -149,6 +206,47 @@ a {
     font-size: 3rem;
     font-weight: 300;
     color: black;
+  }
+  .search-container {
+    width: 490px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  input#search-bar {
+    margin: 0 auto;
+    width: 100%;
+    height: 45px;
+    padding: 0 20px;
+    font-size: 1rem;
+    border: 1px solid #d0cfce;
+    outline: none;
+    &:focus {
+      border: 1px solid rgb(255, 97, 97);
+      transition: 0.35s ease;
+      color: rgb(255, 97, 97);
+      &::-webkit-input-placeholder {
+        transition: opacity 0.45s ease;
+        opacity: 0;
+      }
+      &::-moz-placeholder {
+        transition: opacity 0.45s ease;
+        opacity: 0;
+      }
+      &:-ms-placeholder {
+        transition: opacity 0.45s ease;
+        opacity: 0;
+      }
+    }
+  }
+
+  .search-icon {
+    position: relative;
+    float: right;
+    width: 75px;
+    height: 75px;
+    top: -62px;
+    right: -45px;
   }
 
   .productLibrary {
