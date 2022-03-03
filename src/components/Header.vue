@@ -22,6 +22,7 @@
     <p class="my-account" v-if="user === 'admin' || user === 'customer'">
       {{user}}
        </p>
+       <button @click="signOut()" class="signout-btn">sign out</button>
   </header>
 </template>
 
@@ -30,6 +31,9 @@ import Favorite from "@/components/Favorite.vue";
 export default {
   components: { Favorite },
   methods: {
+    signOut() {
+      this.$store.dispatch("signOut");
+    },
     toggleOverlay() {
       this.$store.dispatch("toggleOverlay");
     },
@@ -126,6 +130,18 @@ header {
  a{
    color: #fff;
  }
+}
+.signout-btn{
+  grid-row: 1/3;
+  grid-column: 13/13;
+  align-self: center;
+  font-family: "Pirata One", cursive;
+  color: white;
+  font-size: 17px;
+  margin: 0;
+  border: none;
+  background-color: #131313;
+  cursor: pointer;
 }
 
 </style>

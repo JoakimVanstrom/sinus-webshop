@@ -96,11 +96,16 @@ export default new Vuex.Store({
 
     saveUser(state, userData) {
       state.user = userData
-    }
-
+    },
+    signOut(state) {
+      state.userRole = "login";
+    },
   },
 
   actions: {
+    signOut ({commit}) {
+      commit('signOut')
+    },
     async authenticate(context, credentials) {
       const response = await API.login(credentials.email, credentials.password);
       API.saveToken(response.data.token);
