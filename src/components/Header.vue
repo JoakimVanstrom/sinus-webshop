@@ -33,6 +33,7 @@ export default {
   methods: {
     signOut() {
       this.$store.dispatch("signOut");
+      this.$router.push('/');
     },
     toggleOverlay() {
       this.$store.dispatch("toggleOverlay");
