@@ -56,19 +56,19 @@ export default {
 .order-history-item-inProcess {
   background: yellow;
   .info {
-      background: whitesmoke;
+    background: whitesmoke;
   }
 }
 .order-history-item-canceled {
   background: red;
   .info {
-      background: whitesmoke;
+    background: whitesmoke;
   }
 }
 .order-history-item-shipped {
   background: green;
   .info {
-      background: whitesmoke;
+    background: whitesmoke;
   }
 }
 </style>

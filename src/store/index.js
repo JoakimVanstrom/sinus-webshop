@@ -7,7 +7,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     email: null,
-    showLogin: false,
     productsList: [],
     cart: [],
     products: {},
@@ -16,7 +15,7 @@ export default new Vuex.Store({
     orderHistory: [],
     userRole: "login",
     address: {},
-    user: {}
+    user: {},
   },
 
   mutations: {
@@ -50,15 +49,11 @@ export default new Vuex.Store({
       state.overlay = !state.overlay;
     },
 
-    toggleLoginPage(state) {
-      state.showLogin = !state.showLogin;
-    },
-
     saveOrders(state, orders) {
       state.orderHistory = orders;
     },
 
-    emptyCart(state) { 
+    emptyCart(state) {
       state.cart = [];
     },
 
@@ -74,10 +69,7 @@ export default new Vuex.Store({
       }
     },
 
-    updateCartItem(state, {
-      id,
-      amount
-    }) {
+    updateCartItem(state, { id, amount }) {
       const inCart = state.cart.find((cartItem) => cartItem.id == id);
       inCart.amount = amount;
     },
@@ -95,9 +87,8 @@ export default new Vuex.Store({
     },
 
     saveUser(state, userData) {
-      state.user = userData
-    }
-
+      state.user = userData;
+    },
   },
 
   actions: {
@@ -110,10 +101,10 @@ export default new Vuex.Store({
       context.commit("saveAuthData", myData.data);
     },
     sendOrder(_, payload) {
-      payload.items = payload.items.map(item => item.id)
-      API.createOrder(payload).then(response => {
+      payload.items = payload.items.map((item) => item.id);
+      API.createOrder(payload).then((response) => {
         console.log(response.data);
-      })
+      });
     },
     async registerUser(context, credentials) {
       const response = await API.registerUser(
@@ -123,9 +114,9 @@ export default new Vuex.Store({
         credentials.city,
         credentials.street,
         credentials.zip
-      )
-      console.log(response)
-      context.commit("saveUser", credentials)
+      );
+      console.log(response);
+      context.commit("saveUser", credentials);
     },
 
     async fetchProducts(context) {
@@ -157,9 +148,7 @@ export default new Vuex.Store({
       context.commit("saveProductsPage", response.data);
     },
 
-    addFavoriteProduct({
-      commit
-    }, product) {
+    addFavoriteProduct({ commit }, product) {
       commit("addFavoriteProduct", product);
     },
 
@@ -171,18 +160,11 @@ export default new Vuex.Store({
       context.commit("toggleLoginPage");
     },
 
-    addToCart({
-      commit
-    }, product) {
+    addToCart({ commit }, product) {
       commit("addToCart", product);
     },
 
-    updateCartItem({
-      commit
-    }, {
-      id,
-      amount
-    }) {
+    updateCartItem({ commit }, { id, amount }) {
       commit("updateCartItem", {
         id,
         amount,
@@ -197,26 +179,21 @@ export default new Vuex.Store({
       context.commit("incrementBtn", product);
     },
 
-    removeFromCart({
-      commit
-    }, product) {
+    removeFromCart({ commit }, product) {
       commit("removeFromCart", product);
     },
 
-    emptyCart({
-      commit
-    }) {
+    emptyCart({ commit }) {
       commit("emptyCart");
     },
 
-    getOrders({
-      commit
-    }) {
-      API.getOrders().then(response => {
-          commit("saveOrders", response.data)
+    getOrders({ commit }) {
+      API.getOrders()
+        .then((response) => {
+          commit("saveOrders", response.data);
         })
-        .catch(console.log)
-    }
+        .catch(console.log);
+    },
   },
 
   getters: {
