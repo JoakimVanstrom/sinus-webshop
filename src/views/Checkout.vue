@@ -76,6 +76,7 @@ export default {
     sendOrder() {
       this.order.items = this.$store.state.cart;
       this.$store.dispatch("sendOrder", this.order);
+      this.$store.dispatch("emptyCart");
     },
   },
   computed: {

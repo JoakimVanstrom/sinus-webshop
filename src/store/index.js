@@ -58,6 +58,10 @@ export default new Vuex.Store({
       state.orderHistory = orders;
     },
 
+    emptyCart(state) { 
+      state.cart = [];
+    },
+
     addToCart(state, product) {
       const inCart = state.cart.find((cartItem) => cartItem.id === product.id);
       if (inCart) {
