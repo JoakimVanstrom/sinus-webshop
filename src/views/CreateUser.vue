@@ -14,7 +14,7 @@
       <input type="text" name="street" v-model="street" />
       <label for="zip">Zip</label>
       <input type="text" name="zip" v-model="zip" />
-     <button @click="changePath">Create Account</button>
+     <button>Create Account</button>
     </form>
   </div>
 </template>
@@ -41,9 +41,7 @@ export default {
         street: this.street,
         zip: this.zip,
       });
-    },
-    changePath(){
-      return this.$router.push(`'/${this.user}'`)
+      return this.$router.go(-1)
     },
   },
   computed: {
