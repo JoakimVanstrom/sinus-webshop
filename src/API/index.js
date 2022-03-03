@@ -9,6 +9,11 @@ export function saveToken(token) {
 export async function login(email, password) {
   return await axios.post("/auth", { email, password });
 }
+
+export async function logout() {
+  return await axios.delete("/auth");
+}
+
 export async function getMyInfo() {
   return await axios.get("/me");
 }
