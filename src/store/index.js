@@ -91,7 +91,6 @@ export default new Vuex.Store({
     },
     signOut(state) {
       state.userRole = "login";
-      state.user = userData;
     },
   },
 
