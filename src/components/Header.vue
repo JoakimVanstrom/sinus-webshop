@@ -12,17 +12,20 @@
         src="@/assets/icons/favorite-heart.svg"
         alt=""
       />
-      <router-link :to="'/' + user"
-        >
-        <img v-if="user === 'admin'" src="@/assets/icons/David.svg" alt=""/>
-        <img v-if="user === 'customer'" src="@/assets/icons/identity.svg" alt=""/>
-        <img v-if="user === 'login'" src="@/assets/icons/identity.svg" alt=""/>
-        </router-link>
+      <router-link :to="'/' + user">
+        <img v-if="user === 'admin'" src="@/assets/icons/David.svg" alt="" />
+        <img
+          v-if="user === 'customer'"
+          src="@/assets/icons/identity.svg"
+          alt=""
+        />
+        <img v-if="user === 'login'" src="@/assets/icons/identity.svg" alt="" />
+      </router-link>
     </div>
     <p class="my-account" v-if="user === 'admin' || user === 'customer'">
-      {{user}}
-       </p>
-       <button @click="signOut()" class="signout-btn">sign out</button>
+     <!--  {{ user }} -->
+      <button @click="signOut()" class="signout-btn">sign out</button>
+    </p>
   </header>
 </template>
 
@@ -33,7 +36,7 @@ export default {
   methods: {
     signOut() {
       this.$store.dispatch("signOut");
-      this.$router.push('/');
+      this.$router.push("/");
     },
     toggleOverlay() {
       this.$store.dispatch("toggleOverlay");
@@ -120,7 +123,7 @@ header {
     margin: 0;
   }
 }
-.my-account{
+.my-account {
   grid-row: 1/3;
   grid-column: 12/13;
   align-self: center;
@@ -128,21 +131,17 @@ header {
   color: white;
   font-size: 30px;
   margin: 0;
- a{
-   color: #fff;
- }
+  a {
+    color: #fff;
+  }
 }
-.signout-btn{
+.signout-btn {
   grid-row: 1/3;
   grid-column: 13/13;
-  align-self: center;
-  font-family: "Pirata One", cursive;
   color: white;
-  font-size: 17px;
-  margin: 0;
+  font-size: 12px;
   border: none;
   background-color: #131313;
   cursor: pointer;
 }
-
 </style>
