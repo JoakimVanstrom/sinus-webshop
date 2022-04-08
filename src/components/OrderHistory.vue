@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <!-- $TIPS: :class="`order-history-item-${item.status}`" -->
     <div
       class="orders"
       v-for="item in orderHistory"

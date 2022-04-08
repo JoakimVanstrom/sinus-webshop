@@ -45,6 +45,8 @@ export default {
       this.$store.dispatch("toggleLoginPage");
     },
     Cart() {
+      // $COMMENT: naming conventions
+      // $FEEDBACK: Replace this with a router-link
       this.$router.push("/Cart");
     },
     addFavoriteProduct() {
@@ -63,6 +65,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+// $FEEDBACK: Move font imports to global styling
 @import url("https://fonts.googleapis.com/css2?family=Pirata+One&display=swap");
 header {
   background-color: #131313;

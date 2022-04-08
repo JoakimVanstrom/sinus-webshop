@@ -32,7 +32,7 @@ let page = 2;
 
 
 //fetch product pages
-export async function getProductsPage() {
+export async function getProductsPage() {// $COMMENT: Just add a page parameter
   return await axios.get(`/items?page=${page}`);
 }
 export async function getProductsPage3() {

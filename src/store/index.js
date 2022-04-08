@@ -102,6 +102,7 @@ export default new Vuex.Store({
       const response = await API.login(credentials.email, credentials.password);
       API.saveToken(response.data.token);
       const myData = await API.getMyInfo();
+      // $COMMENT: Avoid merging console.log-statements
       console.log(myData);
       console.log(response.data);
       context.commit("saveAuthData", myData.data);
@@ -113,6 +114,7 @@ export default new Vuex.Store({
       });
     },
     async registerUser(context, credentials) {
+      // $FEEDBACK: Pass an object instead of 6 paramenters
       const response = await API.registerUser(
         credentials.email,
         credentials.password,
