@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <!-- $TIPS: :class="`order-history-item-${item.status}`" -->
     <div
       class="orders"
       v-for="item in orderHistory"
@@ -56,19 +57,19 @@ export default {
 .order-history-item-inProcess {
   background: yellow;
   .info {
-      background: whitesmoke;
+    background: whitesmoke;
   }
 }
 .order-history-item-canceled {
   background: red;
   .info {
-      background: whitesmoke;
+    background: whitesmoke;
   }
 }
 .order-history-item-shipped {
   background: green;
   .info {
-      background: whitesmoke;
+    background: whitesmoke;
   }
 }
 </style>

@@ -12,16 +12,20 @@
         src="@/assets/icons/favorite-heart.svg"
         alt=""
       />
-      <router-link :to="'/' + user"
-        >
-        <img v-if="user === 'admin'" src="@/assets/icons/David.svg" alt=""/>
-        <img v-if="user === 'customer'" src="@/assets/icons/identity.svg" alt=""/>
-        <img v-if="user === 'login'" src="@/assets/icons/identity.svg" alt=""/>
-        </router-link>
+      <router-link :to="'/' + user">
+        <img v-if="user === 'admin'" src="@/assets/icons/David.svg" alt="" />
+        <img
+          v-if="user === 'customer'"
+          src="@/assets/icons/identity.svg"
+          alt=""
+        />
+        <img v-if="user === 'login'" src="@/assets/icons/identity.svg" alt="" />
+      </router-link>
     </div>
     <p class="my-account" v-if="user === 'admin' || user === 'customer'">
-      {{user}}
-       </p>
+     <!--  {{ user }} -->
+      <button @click="signOut()" class="signout-btn">sign out</button>
+    </p>
   </header>
 </template>
 
@@ -30,6 +34,10 @@ import Favorite from "@/components/Favorite.vue";
 export default {
   components: { Favorite },
   methods: {
+    signOut() {
+      this.$store.dispatch("signOut");
+      this.$router.push("/");
+    },
     toggleOverlay() {
       this.$store.dispatch("toggleOverlay");
     },
@@ -37,6 +45,8 @@ export default {
       this.$store.dispatch("toggleLoginPage");
     },
     Cart() {
+      // $COMMENT: naming conventions
+      // $FEEDBACK: Replace this with a router-link
       this.$router.push("/Cart");
     },
     addFavoriteProduct() {
@@ -55,6 +65,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+// $FEEDBACK: Move font imports to global styling
 @import url("https://fonts.googleapis.com/css2?family=Pirata+One&display=swap");
 header {
   background-color: #131313;
@@ -115,7 +126,7 @@ header {
     margin: 0;
   }
 }
-.my-account{
+.my-account {
   grid-row: 1/3;
   grid-column: 12/13;
   align-self: center;
@@ -123,9 +134,17 @@ header {
   color: white;
   font-size: 30px;
   margin: 0;
- a{
-   color: #fff;
- }
+  a {
+    color: #fff;
+  }
 }
-
+.signout-btn {
+  grid-row: 1/3;
+  grid-column: 13/13;
+  color: white;
+  font-size: 12px;
+  border: none;
+  background-color: #131313;
+  cursor: pointer;
+}
 </style>

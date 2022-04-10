@@ -13,6 +13,7 @@ export default {
   components: { Header, Footer },
   mounted() {
     return (
+      // $FEEDBACK: Use a page-parameter fo fetchProducts-action
       this.$store.dispatch("fetchProducts"),
       this.$store.dispatch("fetchProductsPage"),
       this.$store.dispatch("fetchProductsPage3"),

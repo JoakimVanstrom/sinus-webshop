@@ -41,6 +41,8 @@ export default {
         street: this.street,
         zip: this.zip,
       });
+      // $FEEDBACK: This is dependent on browsing history,
+      // if a client navigates directly to this page this will not work
       return this.$router.go(-1)
     },
   },

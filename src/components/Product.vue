@@ -31,6 +31,7 @@ export default {
   props: ["product"],
   data() {
     return {
+      // $TIPS: Move this to an environment-variable
       path: "http://localhost:5000/images/",
     };
   },
